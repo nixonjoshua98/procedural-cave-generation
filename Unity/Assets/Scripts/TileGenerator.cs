@@ -24,18 +24,15 @@ public class TileGenerator : MonoBehaviour
 		float negativeCoord = -((WORLD_SIZE / 2) * TILE_SIZE) + (WORLD_SIZE % 2 == 0 ? TILE_SIZE / 2 : 0.0f);
 		Vector2Int[] houseCoordPairings = GetHouseTilePositions(WORLD_SIZE, TOTAL_HOUSES);
 
-		int tileNum = 0;
-
-		for (int z = 0; z < WORLD_SIZE; z++)
+		for (int y = 0; y < WORLD_SIZE; y++)
 		{
 			for (int x = 0; x < WORLD_SIZE; x++)
 			{
 				GameObject tileToSpawn;
 
-				Vector3 pos = new Vector3(negativeCoord + (x * TILE_SIZE), 0,  - (negativeCoord + (z * TILE_SIZE)));
+				Vector3 pos = new Vector3(negativeCoord + (x * TILE_SIZE), 0,  - (negativeCoord + (y * TILE_SIZE)));
 
-				// Spawn a house tile
-				if (houseCoordPairings.Contains(new Vector2Int(x, z)))
+				if (houseCoordPairings.Contains(new Vector2Int(x, y)))
 					tileToSpawn = houseTile;
 
 				else
@@ -43,7 +40,7 @@ public class TileGenerator : MonoBehaviour
 
 				GameObject spawnedTile = Instantiate(tileToSpawn, pos, Quaternion.identity, terrainTilesParent.transform);
 
-				allTiles[tileNum++] = spawnedTile;
+				allTiles[y * WORLD_SIZE + x] = spawnedTile;
 			}
 		}
 	}

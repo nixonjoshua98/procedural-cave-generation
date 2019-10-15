@@ -11,6 +11,7 @@ public class DioramaManager : MonoBehaviour
 	[HideInInspector] public int worldSize;
 	[HideInInspector] public int totalHouses;
 	[HideInInspector] public int totalTiles;
+	[HideInInspector] public int tileSize = 10;
 
 	// Generators
 	TileGenerator tileGen;
@@ -35,7 +36,7 @@ public class DioramaManager : MonoBehaviour
 
 		worldSize = Random.Range(5, 15);
 		totalTiles = this.worldSize * worldSize;
-		totalHouses = (int)Random.Range(5, totalTiles * 0.25f);
+		totalHouses = (int)Random.Range(5, Mathf.Min(totalTiles * 0.25f, 20));
 
 		GameObject[] allTiles = new GameObject[totalTiles];
 

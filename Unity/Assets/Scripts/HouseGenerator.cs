@@ -7,8 +7,9 @@ public class HouseGenerator : MonoBehaviour
 
 	static int houseObjIndex = 0;
 
-	[Header("House Objects")]
+	[Header("Objects")]
 	public GameObject[] houseObjects;
+	public GameObject pathObject;
 
 	public void Start()
 	{
