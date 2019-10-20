@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 913, y: 444}
-  m_MaxSize: {x: 22008, y: 14022}
+  m_MinSize: {x: 917, y: 466}
+  m_MaxSize: {x: 22012, y: 14044}
   vertical: 0
-  controlID: 75
+  controlID: 143
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1598
     height: 947
-  m_MinSize: {x: 638, y: 444}
-  m_MaxSize: {x: 18008, y: 14022}
+  m_MinSize: {x: 640, y: 466}
+  m_MaxSize: {x: 18010, y: 14044}
   vertical: 1
-  controlID: 76
+  controlID: 144
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 1598
     height: 773
-  m_MinSize: {x: 638, y: 344}
-  m_MaxSize: {x: 18008, y: 10022}
+  m_MinSize: {x: 640, y: 344}
+  m_MaxSize: {x: 18010, y: 10022}
   vertical: 0
   controlID: 77
 --- !u!114 &8
@@ -185,8 +185,8 @@ MonoBehaviour:
     y: 0
     width: 279
     height: 773
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 222}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -315,8 +315,8 @@ MonoBehaviour:
     y: 773
     width: 1598
     height: 174
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 122}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -341,8 +341,8 @@ MonoBehaviour:
     y: 0
     width: 322
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 72}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -460,21 +460,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: aa96fcff6efbffff
+      m_ExpandedIDs: 5862e4ff6e62e4ff6c04e6ff2614e6ff1cc5e6ff3cc5e6ff40cae9ff60cae9ff04dae9ff24dae9ffcce3f6ffb812f7fff812f7ff5813f7ff6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: HouseTile
-        m_OriginalName: HouseTile
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -223574
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -520,9 +520,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.8930764, y: -2.1376915, z: -10.387543}
+    m_Target: {x: -3.8869781, y: -9.74749, z: -3.73209}
     speed: 2
-    m_Value: {x: -1.8930764, y: -2.1376915, z: -10.387543}
+    m_Value: {x: -3.8869781, y: -9.74749, z: -3.73209}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -551,13 +551,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.33956915, y: -0.015218354, z: 0.0055056293, w: 0.9404632}
+    m_Target: {x: 0.45282608, y: 0.3155758, z: -0.17527969, w: 0.81527877}
     speed: 2
-    m_Value: {x: 0.33956236, y: -0.015218049, z: 0.005505519, w: 0.94044435}
+    m_Value: {x: 0.45281658, y: 0.3155692, z: -0.17527601, w: 0.81526166}
   m_Size:
-    m_Target: 141.72227
+    m_Target: 48.776527
     speed: 2
-    m_Value: 135.6194
+    m_Value: 48.776527
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -648,19 +648,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/FloorTiles
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/FloorTiles
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Repos\Procedural-Content-Generation\Unity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 66390000
-    m_LastClickedID: 14694
+    m_SelectedIDs: 823a0000
+    m_LastClickedID: 14978
     m_ExpandedIDs: 00000000a62c00007039000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0

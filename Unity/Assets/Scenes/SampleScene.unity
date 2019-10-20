@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 314264834}
   - component: {fileID: 314264833}
   - component: {fileID: 314264836}
-  - component: {fileID: 314264835}
   m_Layer: 0
   m_Name: Generators
   m_TagString: Untagged
@@ -151,11 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5ac0860b0eab34ca810637879ee3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
-  worldSize: 0
-  totalHouses: 0
-  totalTiles: 0
-  tileSize: 10
+  SEED: 0
+  WORLD_SIZE: 0
+  TOTAL_TILES: 0
+  NUM_SETTLEMENTS: 0
+  TILE_SIZE: 10
+  allTiles: []
 --- !u!4 &314264834
 Transform:
   m_ObjectHideFlags: 0
@@ -170,20 +170,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &314264835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314264832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e68f2fd056238418b8eb46bd833bca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathObject: {fileID: 8073541888601883204, guid: c28ead5398068304abb494c9d2ab0093,
-    type: 3}
 --- !u!114 &314264836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,11 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainTilesParent: {fileID: 2096089197}
-  emptyTile: {fileID: 4611997573232134765, guid: 60d258c85e0cbc44dab59f9f2d6610c8,
+  emptyTileObj: {fileID: 4611997573232134765, guid: 60d258c85e0cbc44dab59f9f2d6610c8,
     type: 3}
-  houseTile: {fileID: 5210238340400910394, guid: 7416300c516de694eadff2f8ed08f64c,
-    type: 3}
-  errorTile: {fileID: 2208434943137735665, guid: eb9ea42ec34190f4198699ae73a4146a,
+  settlementTileObj: {fileID: 3807446973122343211, guid: d6cc2bc0c6421864aa4ef8f447090cce,
     type: 3}
 --- !u!1 &963194225
 GameObject:

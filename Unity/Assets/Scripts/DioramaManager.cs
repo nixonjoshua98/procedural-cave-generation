@@ -7,40 +7,40 @@ public class DioramaManager : MonoBehaviour
 {
 	public static DioramaManager inst = null;
 
-	[HideInInspector] public int seed;
-	[HideInInspector] public int worldSize;
-	[HideInInspector] public int totalHouses;
-	[HideInInspector] public int totalTiles;
-	[HideInInspector] public int tileSize = 10;
+	[HideInInspector] public int SEED;
+	[HideInInspector] public int WORLD_SIZE;
+	[HideInInspector] public int TOTAL_TILES;
+	[HideInInspector] public int NUM_SETTLEMENTS;
+	[HideInInspector] public int TILE_SIZE = 10;
+
+	[HideInInspector] public GameObject[] allTiles;
 
 	// Generators
 	TileGenerator tileGen;
-	PathGenerator pathGen;
 
 	private void Awake()
 	{
-		if (inst)
-			Destroy(this);
-		else
-			inst = this;
+		// Set the instance
+		inst = this;
 
+		// Grab components
 		tileGen = GetComponent<TileGenerator>();
-		pathGen = GetComponent<PathGenerator>();
+
+		// Seeding
+		SEED = Random.Range(0, 999999);
+
+		UnityEngine.Random.InitState(this.SEED);
+
+		// Constants
+		WORLD_SIZE		= Random.Range(4, 8);
+		TOTAL_TILES		= this.WORLD_SIZE * WORLD_SIZE;
+		NUM_SETTLEMENTS = Random.Range(1, WORLD_SIZE / 2);
 	}
 
 	private void Start()
 	{
-		seed = Random.Range(0, 999999);
+		allTiles = new GameObject[TOTAL_TILES];
 
-		UnityEngine.Random.InitState(this.seed);
-
-		worldSize = Random.Range(5, 15);
-		totalTiles = this.worldSize * worldSize;
-		totalHouses = (int)Random.Range(5, Mathf.Min(totalTiles * 0.25f, 20));
-
-		GameObject[] allTiles = new GameObject[totalTiles];
-
-		tileGen.Generate(ref allTiles);
-		pathGen.Generate(ref allTiles);
+		tileGen.Generate();
 	}
 }

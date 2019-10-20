@@ -11,32 +11,31 @@ public class TileGenerator : MonoBehaviour
 	[Header("Tiles")]
 	public GameObject terrainTilesParent;
 
-	public GameObject emptyTile;
-	public GameObject houseTile;
-	public GameObject errorTile;
+	public GameObject emptyTileObj;
+	public GameObject settlementTileObj;
 
-	public void Generate(ref GameObject[] allTiles)
+	public void Generate()
 	{
-		int WORLD_SIZE = DioramaManager.inst.worldSize;
-		int TOTAL_HOUSES = DioramaManager.inst.totalHouses;
-		int TOTAL_TILES = DioramaManager.inst.totalTiles;
+		SpawnEmptyTiles();
+		SpawnSettlements();
+	}
 
+	private void SpawnEmptyTiles()
+	{
+		int WORLD_SIZE = DioramaManager.inst.WORLD_SIZE;
+
+		GameObject[] allTiles = DioramaManager.inst.allTiles;
+
+		// This centers the tiles in the scene
 		float negativeCoord = -((WORLD_SIZE / 2) * TILE_SIZE) + (WORLD_SIZE % 2 == 0 ? TILE_SIZE / 2 : 0.0f);
-		Vector2Int[] houseCoordPairings = GetHouseTilePositions(WORLD_SIZE, TOTAL_HOUSES);
 
 		for (int y = 0; y < WORLD_SIZE; y++)
 		{
 			for (int x = 0; x < WORLD_SIZE; x++)
 			{
-				GameObject tileToSpawn;
+				GameObject tileToSpawn = emptyTileObj;
 
-				Vector3 pos = new Vector3(negativeCoord + (x * TILE_SIZE), 0,  - (negativeCoord + (y * TILE_SIZE)));
-
-				if (houseCoordPairings.Contains(new Vector2Int(x, y)))
-					tileToSpawn = houseTile;
-
-				else
-					tileToSpawn = emptyTile;
+				Vector3 pos = new Vector3(negativeCoord + (x * TILE_SIZE), 0, -(negativeCoord + (y * TILE_SIZE)));
 
 				GameObject spawnedTile = Instantiate(tileToSpawn, pos, Quaternion.identity, terrainTilesParent.transform);
 
@@ -45,40 +44,23 @@ public class TileGenerator : MonoBehaviour
 		}
 	}
 
-	private Vector2Int[] GetHouseTilePositions(int worldSize, int totalHouses)
+	private void SpawnSettlements()
 	{
-		// Horrible and slow way of doing this.
+		GameObject[] allTiles = DioramaManager.inst.allTiles;
 
-		List<Vector2Int> allPermutations = GenerateAllTilePermutations(worldSize);
-
-		Vector2Int[] houseIndexes = new Vector2Int[totalHouses];
-
-		for (int i = 0; i < totalHouses; i++)
+		for (int i = 0; i < DioramaManager.inst.NUM_SETTLEMENTS; i++)
 		{
-			int randNum = Random.Range(0, allPermutations.Count);
+			int rand = Random.Range(0, allTiles.Length);
 
-			Vector2Int v = allPermutations[randNum];
+			GameObject emptyTile = allTiles[rand];
 
-			allPermutations.RemoveAt(randNum);
+			Vector3 spawnPos = emptyTile.transform.position;
 
-			houseIndexes[i] = v;
+			GameObject settlementTile = Instantiate(settlementTileObj, spawnPos, emptyTile.transform.rotation);
+
+			Destroy(emptyTile);
+
+			allTiles[rand] = settlementTile;
 		}
-
-		return houseIndexes;
-	}
-
-	private List<Vector2Int> GenerateAllTilePermutations(int worldSize)
-	{
-		List<Vector2Int> allTilePermutations = new List<Vector2Int>();
-
-		for (int i = 0; i < worldSize; i++)
-		{
-			for (int j = 0; j < worldSize; j++)
-			{
-				allTilePermutations.Add(new Vector2Int(i, j));
-			}
-		}
-
-		return allTilePermutations;
 	}
 }
