@@ -10,7 +10,7 @@ public class HouseGenerator : MonoBehaviour
 	[Header("Objects")]
 	public GameObject[] houseObjects;
 
-	public void Generate(Vector3 centerPoint)
+	public void Generate(Vector3 lookAtPos)
 	{
 		GameObject houseSlot	= transform.GetChild(0).gameObject;
 		GameObject houseToSpawn = houseObjects[houseObjIndex++ % houseObjects.Length];
@@ -21,9 +21,9 @@ public class HouseGenerator : MonoBehaviour
 
 		GameObject spawnedHouse = Instantiate(houseToSpawn, pos, houseToSpawn.transform.rotation);
 
-		spawnedHouse.transform.parent = transform;
+        spawnedHouse.transform.parent = transform;
 
-		Vector3 dir = (centerPoint - spawnedHouse.transform.position).normalized;
+		Vector3 dir = (lookAtPos - spawnedHouse.transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 
 		lookRotation.x = 0;

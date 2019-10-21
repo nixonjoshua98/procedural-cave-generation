@@ -8,6 +8,7 @@ TagManager:
   - HouseTile
   - Undefined
   - EmptyTile
+  - TerrainPlane
   layers:
   - Default
   - TransparentFX

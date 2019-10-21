@@ -154,7 +154,6 @@ MonoBehaviour:
   WORLD_SIZE: 0
   TOTAL_TILES: 0
   NUM_SETTLEMENTS: 0
-  TILE_SIZE: 10
   allTiles: []
 --- !u!4 &314264834
 Transform:
@@ -182,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5fa9411e503b74ebe108d4eed01fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainObj: {fileID: 6238961763620476718, guid: 4a57805ed7396e446a43017231c661d7,
+    type: 3}
   terrainTilesParent: {fileID: 2096089197}
   emptyTileObj: {fileID: 4611997573232134765, guid: 60d258c85e0cbc44dab59f9f2d6610c8,
     type: 3}

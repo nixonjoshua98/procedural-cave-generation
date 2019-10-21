@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 
 public class DioramaManager : MonoBehaviour
 {
@@ -11,7 +13,10 @@ public class DioramaManager : MonoBehaviour
 	[HideInInspector] public int WORLD_SIZE;
 	[HideInInspector] public int TOTAL_TILES;
 	[HideInInspector] public int NUM_SETTLEMENTS;
-	[HideInInspector] public int TILE_SIZE = 10;
+
+    private int _TILE_SIZE = 5;
+
+    [HideInInspector] public int TILE_SIZE { get => _TILE_SIZE; }
 
 	[HideInInspector] public GameObject[] allTiles;
 
@@ -26,15 +31,15 @@ public class DioramaManager : MonoBehaviour
 		// Grab components
 		tileGen = GetComponent<TileGenerator>();
 
-		// Seeding
-		SEED = Random.Range(0, 999999);
+        // Seeding
+        SEED = 123;// Random.Range(0, 999999);
 
-		UnityEngine.Random.InitState(this.SEED);
+		Random.InitState(this.SEED);
 
 		// Constants
-		WORLD_SIZE		= Random.Range(4, 8);
+		WORLD_SIZE		= Random.Range(9, 24);
 		TOTAL_TILES		= this.WORLD_SIZE * WORLD_SIZE;
-		NUM_SETTLEMENTS = Random.Range(1, WORLD_SIZE / 2);
+		NUM_SETTLEMENTS = Random.Range(1, (int)Mathf.Sqrt(WORLD_SIZE));
 	}
 
 	private void Start()
@@ -43,4 +48,12 @@ public class DioramaManager : MonoBehaviour
 
 		tileGen.Generate();
 	}
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadSceneAsync(0);
+        }
+    }
 }

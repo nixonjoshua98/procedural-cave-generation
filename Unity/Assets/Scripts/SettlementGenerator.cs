@@ -21,32 +21,37 @@ public class SettlementGenerator : MonoBehaviour
 
 		foreach (int n in neighbours)
 		{
+
 			GameObject tile = allTiles[n];
 
 			if (!tile.CompareTag("EmptyTile")) continue;
 
 			GameObject houseTile = Instantiate(houseTileObj, tile.transform.position, tile.transform.rotation);
 
-			Destroy(tile);
+            houseTile.transform.parent = tile.transform.parent;
+
+            Destroy(tile);
 
 			allTiles[n] = houseTile;
 
 			houseTile.GetComponent<HouseGenerator>().Generate(transform.position);
-		}
+
+        }
 	}
+
 
 	private List<int> GetNeighbours()
 	{
 		GameObject[] allTiles	= DioramaManager.inst.allTiles;
-		int TILE_SIZE			= DioramaManager.inst.TILE_SIZE;
+		int TILE_SIZE		    = DioramaManager.inst.TILE_SIZE;
 
 		List <int> neighbours = new List<int>();
 
 		Vector3 pos = transform.position;
 
-		for (float x = pos.x - TILE_SIZE; x <= pos.x + TILE_SIZE; x += TILE_SIZE)
+		for (float x = pos.x - (TILE_SIZE * 1); x <= pos.x + (TILE_SIZE * 1); x += TILE_SIZE)
 		{
-			for (float z = pos.z - TILE_SIZE; z <= pos.z + TILE_SIZE; z += TILE_SIZE)
+			for (float z = pos.z - (TILE_SIZE * 1); z <= pos.z + (TILE_SIZE * 1); z += TILE_SIZE)
 			{
 				Vector3 v = new Vector3(x, 0.0f, z);
 

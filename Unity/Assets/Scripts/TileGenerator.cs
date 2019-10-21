@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class TileGenerator : MonoBehaviour
 {
-	// Constants
-	const int TILE_SIZE = 10;
+    public GameObject terrainObj;
 
 	[Header("Tiles")]
 	public GameObject terrainTilesParent;
@@ -18,11 +17,14 @@ public class TileGenerator : MonoBehaviour
 	{
 		SpawnEmptyTiles();
 		SpawnSettlements();
-	}
+        SetupTerrainPlane();
+
+    }
 
 	private void SpawnEmptyTiles()
 	{
 		int WORLD_SIZE = DioramaManager.inst.WORLD_SIZE;
+        int TILE_SIZE = DioramaManager.inst.TILE_SIZE;
 
 		GameObject[] allTiles = DioramaManager.inst.allTiles;
 
@@ -44,6 +46,13 @@ public class TileGenerator : MonoBehaviour
 		}
 	}
 
+    private void SetupTerrainPlane()
+    {
+        //GameObject terrain = Instantiate(terrainObj, new Vector3(0, 0, 0), Quaternion.identity);
+
+        //terrain.transform.localScale = new Vector3(DioramaManager.inst.WORLD_SIZE / 2, 1.0f, DioramaManager.inst.WORLD_SIZE / 2);
+    }
+
 	private void SpawnSettlements()
 	{
 		GameObject[] allTiles = DioramaManager.inst.allTiles;
@@ -57,6 +66,8 @@ public class TileGenerator : MonoBehaviour
 			Vector3 spawnPos = emptyTile.transform.position;
 
 			GameObject settlementTile = Instantiate(settlementTileObj, spawnPos, emptyTile.transform.rotation);
+
+            settlementTile.transform.parent = emptyTile.transform.parent;
 
 			Destroy(emptyTile);
 
