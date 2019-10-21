@@ -9,6 +9,9 @@ TagManager:
   - Undefined
   - EmptyTile
   - TerrainPlane
+  - SettlementTile
+  - House
+  - TilesParent
   layers:
   - Default
   - TransparentFX

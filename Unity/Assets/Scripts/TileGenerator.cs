@@ -18,7 +18,6 @@ public class TileGenerator : MonoBehaviour
 		SpawnEmptyTiles();
 		SpawnSettlements();
         SetupTerrainPlane();
-
     }
 
 	private void SpawnEmptyTiles()
@@ -35,6 +34,7 @@ public class TileGenerator : MonoBehaviour
 		{
 			for (int x = 0; x < WORLD_SIZE; x++)
 			{
+
 				GameObject tileToSpawn = emptyTileObj;
 
 				Vector3 pos = new Vector3(negativeCoord + (x * TILE_SIZE), 0, -(negativeCoord + (y * TILE_SIZE)));
@@ -42,15 +42,20 @@ public class TileGenerator : MonoBehaviour
 				GameObject spawnedTile = Instantiate(tileToSpawn, pos, Quaternion.identity, terrainTilesParent.transform);
 
 				allTiles[y * WORLD_SIZE + x] = spawnedTile;
-			}
+
+            }
 		}
 	}
 
     private void SetupTerrainPlane()
     {
-        //GameObject terrain = Instantiate(terrainObj, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject terrain = Instantiate(terrainObj, new Vector3(0, 0.5f, 0), Quaternion.identity);
 
-        //terrain.transform.localScale = new Vector3(DioramaManager.inst.WORLD_SIZE / 2, 1.0f, DioramaManager.inst.WORLD_SIZE / 2);
+        int half = (DioramaManager.inst.WORLD_SIZE / 2);
+
+        terrain.transform.localScale = new Vector3(half, 1.0f, half);
+
+        terrain.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(half, half);
     }
 
 	private void SpawnSettlements()
@@ -59,6 +64,7 @@ public class TileGenerator : MonoBehaviour
 
 		for (int i = 0; i < DioramaManager.inst.NUM_SETTLEMENTS; i++)
 		{
+
 			int rand = Random.Range(0, allTiles.Length);
 
 			GameObject emptyTile = allTiles[rand];
@@ -72,6 +78,7 @@ public class TileGenerator : MonoBehaviour
 			Destroy(emptyTile);
 
 			allTiles[rand] = settlementTile;
+
 		}
 	}
 }

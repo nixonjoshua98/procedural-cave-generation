@@ -8,12 +8,12 @@ public class SettlementGenerator : MonoBehaviour
 
 	public GameObject houseTileObj;
 
-	public void Start()
-	{
-		Generate();
-	}
+    private void Start()
+    {
+        Generate();
+    }
 
-	private void Generate()
+    private void Generate()
 	{
 		List<int> neighbours = GetNeighbours();
 
@@ -29,6 +29,8 @@ public class SettlementGenerator : MonoBehaviour
 			GameObject houseTile = Instantiate(houseTileObj, tile.transform.position, tile.transform.rotation);
 
             houseTile.transform.parent = tile.transform.parent;
+
+            print(tile.transform.parent.name);
 
             Destroy(tile);
 

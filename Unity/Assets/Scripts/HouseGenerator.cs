@@ -21,7 +21,7 @@ public class HouseGenerator : MonoBehaviour
 
 		GameObject spawnedHouse = Instantiate(houseToSpawn, pos, houseToSpawn.transform.rotation);
 
-        spawnedHouse.transform.parent = transform;
+        spawnedHouse.transform.parent = transform.parent;
 
 		Vector3 dir = (lookAtPos - spawnedHouse.transform.position).normalized;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -30,7 +30,5 @@ public class HouseGenerator : MonoBehaviour
 		lookRotation.z = 0;
 
 		spawnedHouse.transform.rotation = Quaternion.Slerp( transform.rotation, lookRotation, Random.Range(0.75f, 1.25f) );
-
-		Destroy(houseSlot);
 	}
 }
