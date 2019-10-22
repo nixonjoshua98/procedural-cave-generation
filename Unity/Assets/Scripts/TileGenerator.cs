@@ -17,7 +17,7 @@ public class TileGenerator : MonoBehaviour
 	{
 		SpawnEmptyTiles();
 		SpawnSettlements();
-        SetupTerrainPlane();
+        //SetupTerrainPlane();
     }
 
 	private void SpawnEmptyTiles()

@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseObjects:
   - {fileID: 2976813421600205262, guid: e05e320227ac09343a5da505a0f98df1, type: 3}
+  - {fileID: 6585680575929522706, guid: b67be39aa472dea468db14a949acff2d, type: 3}
 --- !u!1 &5210238340731946654
 GameObject:
   m_ObjectHideFlags: 0
