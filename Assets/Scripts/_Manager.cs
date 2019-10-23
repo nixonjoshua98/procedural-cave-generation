@@ -42,24 +42,7 @@ public class _Manager : MonoBehaviour
 
 		tileGen.Generate();
 
-		foreach (GameObject t in allTiles)
-		{
-			switch (t.tag)
-			{
-				case "SettlementTile":
-					t.GetComponent<_SettlementTile>().Generate();
-					break;
-
-				default:
-					break;
-			}
-
-		}
-
-
 		if (!DEBUG && allTiles.Length > 0)
-		{
 			Destroy(allTiles[0].transform.parent.gameObject);
-		}
 	}
 }

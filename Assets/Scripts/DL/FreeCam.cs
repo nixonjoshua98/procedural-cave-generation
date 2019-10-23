@@ -17,7 +17,7 @@ using UnityEngine;
 ///	mouse			- free look / rotation
 ///     
 /// </summary>
-public class CameraController : MonoBehaviour
+public class FreeCam : MonoBehaviour
 {
 	/// <summary>
 	/// Normal speed of camera movement.
@@ -108,11 +108,11 @@ public class CameraController : MonoBehaviour
 			transform.position = transform.position + transform.forward * axis * zoomSensitivity;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+		if (Input.GetKeyDown(KeyCode.Mouse1))
 		{
 			StartLooking();
 		}
-		else if (Input.GetKeyUp(KeyCode.Mouse0))
+		else if (Input.GetKeyUp(KeyCode.Mouse1))
 		{
 			StopLooking();
 		}

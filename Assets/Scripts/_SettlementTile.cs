@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class _SettlementTile : MonoBehaviour
+public class _SettlementTile : _TileBaseClass
 {
 	public GameObject houseTileOBJ;
 
-	public void Generate()
+	public override void Generate()
 	{
 		List<int> allNeighbours = GetAllNeighbours(2);
 

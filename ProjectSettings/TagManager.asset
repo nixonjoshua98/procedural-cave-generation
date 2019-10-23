@@ -6,13 +6,12 @@ TagManager:
   tags:
   - HouseSlot
   - HouseTile
-  - Undefined
   - EmptyTile
-  - TerrainPlane
   - SettlementTile
   - House
   - TilesParent
   - DioramaParent
+  - DecorationTile
   layers:
   - Default
   - TransparentFX
