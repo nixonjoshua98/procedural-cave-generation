@@ -29,7 +29,7 @@ public class _SettlementTile : _TileBaseClass
 		foreach (int n in neighbourHouses)
 		{
 
-			GameObject tile = _Manager.inst.allTiles[n];
+			GameObject tile = _Manager.inst.tiles[n];
 
 			GameObject houseTile = Instantiate(houseTileOBJ, tile.transform.position, tile.transform.rotation);
 
@@ -37,7 +37,7 @@ public class _SettlementTile : _TileBaseClass
 
 			Destroy(tile);
 
-			_Manager.inst.allTiles[n] = houseTile;
+			_Manager.inst.tiles[n] = houseTile;
 
 			houseTile.GetComponent<_HouseTile>().Generate(transform.position);
 
@@ -46,7 +46,7 @@ public class _SettlementTile : _TileBaseClass
 
 	private List<int> GetAllNeighbours(int radius)
 	{
-		GameObject[] allTiles = _Manager.inst.allTiles;
+		GameObject[] allTiles = _Manager.inst.tiles;
 		int TILE_SIZE = _Manager.inst.TILE_SIZE;
 
 		List<int> neighbours = new List<int>();

@@ -10,39 +10,42 @@ public class _Manager : MonoBehaviour
 	[HideInInspector] public int WORLD_SIZE;
 	[HideInInspector] public int TOTAL_TILES;
 
-	private const bool _DEBUG = true;
-	private const int _TILE_SIZE = 5;
+	private const int _TILE_SIZE = 3;
 
 	[HideInInspector] public int TILE_SIZE { get => _TILE_SIZE; }
-	[HideInInspector] public bool DEBUG { get => _DEBUG; }
 
-	[HideInInspector] public GameObject[] allTiles;
+	[HideInInspector] public GameObject[] tiles;
 
 	// Generators
-	_TileGenerator tileGen;
+	_EmptyTileGen emptyTileGen;
+	_SettlementTileGen settleTileGen;
 
 
 	private void Awake()
 	{
 		inst = this;
 
-		tileGen = GetComponent<_TileGenerator>();
+		emptyTileGen = GetComponent<_EmptyTileGen>();
+		settleTileGen = GetComponent<_SettlementTileGen>();
 
-		SEED = 13;
+		SEED = Random.Range(1, 99999);
+
+		Debug.Log("SEED: " + SEED);
 
 		Random.InitState(this.SEED);
 
-		WORLD_SIZE = 16;
+		WORLD_SIZE = Random.Range(64, 128);
+
+		Debug.Log("WORLD SIZE: " + WORLD_SIZE);
+
 		TOTAL_TILES = (int) Mathf.Pow(this.WORLD_SIZE, 2);
 	}
 
 	private void Start()
 	{
-		allTiles = new GameObject[TOTAL_TILES];
+		tiles = new GameObject[TOTAL_TILES];
 
-		tileGen.Generate();
-
-		if (!DEBUG && allTiles.Length > 0)
-			Destroy(allTiles[0].transform.parent.gameObject);
+		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		settleTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }
