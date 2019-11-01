@@ -4,37 +4,34 @@ using UnityEngine;
 
 public class _Manager : MonoBehaviour
 {
-	public static _Manager inst = null;
-
-	[HideInInspector] public int SEED;
+	public int SEED;
 	[HideInInspector] public int WORLD_SIZE;
 	[HideInInspector] public int TOTAL_TILES;
 
 	private const int _TILE_SIZE = 3;
 
 	[HideInInspector] public int TILE_SIZE { get => _TILE_SIZE; }
-
 	[HideInInspector] public GameObject[] tiles;
 
 	// Generators
-	_EmptyTileGen emptyTileGen;
-	_SettlementTileGen settleTileGen;
-
+	_EmptyTileGen		emptyTileGen;
+	_SettlementGen		settlementGen;
+	_DecorationTileGen	decoGen;
 
 	private void Awake()
 	{
-		inst = this;
+		emptyTileGen	= GetComponent<_EmptyTileGen>();
+		settlementGen	= GetComponent<_SettlementGen>();
+		decoGen			= GetComponent<_DecorationTileGen>();
 
-		emptyTileGen = GetComponent<_EmptyTileGen>();
-		settleTileGen = GetComponent<_SettlementTileGen>();
-
-		SEED = Random.Range(1, 99999);
+		if (SEED == 0)
+			SEED = Random.Range(0, 99999);
 
 		Debug.Log("SEED: " + SEED);
 
 		Random.InitState(this.SEED);
 
-		WORLD_SIZE = Random.Range(64, 128);
+		WORLD_SIZE = Random.Range(64, 64);
 
 		Debug.Log("WORLD SIZE: " + WORLD_SIZE);
 
@@ -46,6 +43,7 @@ public class _Manager : MonoBehaviour
 		tiles = new GameObject[TOTAL_TILES];
 
 		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		settleTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }
