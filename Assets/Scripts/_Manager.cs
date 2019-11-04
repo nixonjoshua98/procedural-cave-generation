@@ -17,21 +17,26 @@ public class _Manager : MonoBehaviour
 	_EmptyTileGen		emptyTileGen;
 	_SettlementGen		settlementGen;
 	_DecorationTileGen	decoGen;
+    _DynamicTileGen     dyanmicTileGen;
+    _RiverGen           riverGen;
 
 	private void Awake()
 	{
 		emptyTileGen	= GetComponent<_EmptyTileGen>();
 		settlementGen	= GetComponent<_SettlementGen>();
 		decoGen			= GetComponent<_DecorationTileGen>();
+        dyanmicTileGen  = GetComponent<_DynamicTileGen>();
+        riverGen        = GetComponent<_RiverGen>();
 
-		if (SEED == 0)
+
+        if (SEED == 0)
 			SEED = Random.Range(0, 99999);
 
 		Debug.Log("SEED: " + SEED);
 
 		Random.InitState(this.SEED);
 
-		WORLD_SIZE = Random.Range(64, 64);
+        WORLD_SIZE = Random.Range(32, 96);
 
 		Debug.Log("WORLD SIZE: " + WORLD_SIZE);
 
@@ -43,7 +48,9 @@ public class _Manager : MonoBehaviour
 		tiles = new GameObject[TOTAL_TILES];
 
 		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+        riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+        settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+        dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+        decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }

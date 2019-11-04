@@ -355,6 +355,8 @@ GameObject:
   - component: {fileID: 2033552626}
   - component: {fileID: 2033552627}
   - component: {fileID: 2033552628}
+  - component: {fileID: 2033552623}
+  - component: {fileID: 2033552629}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -362,6 +364,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2033552623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033552622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdde03c5887cb7419f2901823255f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicTiles:
+  - {fileID: 5863642622226416128, guid: 7e0df52671b4b6f4f9b5f8b80cb60d79, type: 3}
 --- !u!114 &2033552624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714528afbf2e1a549b9e21ebc1b09442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SEED: 93352
+  SEED: 0
   WORLD_SIZE: 0
   TOTAL_TILES: 0
   tiles: []
@@ -442,7 +458,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decorationTiles:
   - {fileID: 6201734807858545188, guid: 8f9f56922d2b3424290ef162361de40d, type: 3}
-  - {fileID: 5519736370997316672, guid: 51dce5a3e9fefc64a8642b7fc9eb5513, type: 3}
   decorations:
   - {fileID: 1767186340419564983, guid: acaeae9b98602314f8a0139763517f95, type: 3}
-  - {fileID: 5561705320732203742, guid: 60f4e394144232a4f948fe97f9a35e34, type: 3}
+--- !u!114 &2033552629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033552622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2672aa04d4897484a8d000564864fb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,8 @@ TagManager:
   - TilesParent
   - DecorationTile
   - Decoration
+  - MushroomTile
+  - WaterTile
   layers:
   - Default
   - TransparentFX

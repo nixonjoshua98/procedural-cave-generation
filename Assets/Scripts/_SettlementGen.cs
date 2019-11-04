@@ -11,9 +11,9 @@ public class _SettlementGen : MonoBehaviour
 
 	public void Generate(int worldSize, int tileSize, ref GameObject[] tiles)
 	{
-		int NUM_SETTLEMENTS = Random.Range(5, 7);
+		int NUM_SETTLEMENTS = Random.Range(5, 8);
 
-		Debug.Log("SETTLEMENTS: " + NUM_SETTLEMENTS);
+		Debug.Log("MAX SETTLEMENTS: " + NUM_SETTLEMENTS);
 
 		int houseModelIndex = 0;
 
