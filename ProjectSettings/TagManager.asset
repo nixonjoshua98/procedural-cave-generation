@@ -4,14 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - HouseSlot
   - HouseTile
   - EmptyTile
   - SettlementTile
   - House
   - TilesParent
-  - DioramaParent
   - DecorationTile
+  - Decoration
   layers:
   - Default
   - TransparentFX
