@@ -51,7 +51,7 @@ public class _Manager : MonoBehaviour
 
 		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 
-		//riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 
 		dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 
