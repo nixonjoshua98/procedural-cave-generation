@@ -36,7 +36,7 @@ public class _Manager : MonoBehaviour
 
 		Random.InitState(this.SEED);
 
-        WORLD_SIZE = Random.Range(32, 96);
+        WORLD_SIZE = Random.Range(48, 64);
 
 		Debug.Log("WORLD SIZE: " + WORLD_SIZE);
 
@@ -48,9 +48,13 @@ public class _Manager : MonoBehaviour
 		tiles = new GameObject[TOTAL_TILES];
 
 		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-        riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-        settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-        dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-        decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+
+		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+
+		//riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+
+		dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+
+		decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }

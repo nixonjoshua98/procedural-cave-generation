@@ -472,3 +472,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2672aa04d4897484a8d000564864fb8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterTile: {fileID: 5572497028959157015, guid: a150deaad46aec4429f164b025e59251,
+    type: 3}
