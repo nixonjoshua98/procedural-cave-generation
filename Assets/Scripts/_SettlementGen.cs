@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class _SettlementGen : MonoBehaviour
 {
-	public GameObject settlementTile;
-	public GameObject houseTile;
+	public GameObject settlementTileOBJ;
+	public GameObject houseTileOBJ;
 
 	public GameObject[] houses;
 
@@ -19,37 +19,48 @@ public class _SettlementGen : MonoBehaviour
 
 		foreach (KeyValuePair<int, List<int>> row in GetSettlementPositions(NUM_SETTLEMENTS, tileSize, 5, ref tiles))
 		{
-			var tile = Instantiate(settlementTile, tiles[row.Key].transform.position, Quaternion.identity, tiles[row.Key].transform.parent);
+			// Settlement Center
+			GameObject settlementCenterTile = Instantiate(settlementTileOBJ, tiles[row.Key].transform.position, Quaternion.identity, tiles[row.Key].transform.parent);
 
 			Destroy(tiles[row.Key]);
 
-			tiles[row.Key] = tile;
+			tiles[row.Key] = settlementCenterTile;
 
+			// Rest of settlement
 			foreach (int n in row.Value)
 			{
-				GameObject settlement, house;
+				Vector3 centerPos = tiles[row.Key].transform.position;
 
-				// 40% to spawn a house
-				if (Random.Range(0, 100) <= 40)
+				GameObject settlementTile, houseObject;
+
+				// 30% to spawn a house
+				if (Random.Range(0, 100) <= 30)
 				{
-					settlement = Instantiate(houseTile, tiles[n].transform.position, Quaternion.identity, tiles[n].transform.parent);
+					settlementTile	= Instantiate(houseTileOBJ, tiles[n].transform.position, Quaternion.identity, tiles[n].transform.parent);
+					houseObject		= Instantiate(houses[houseModelIndex], settlementTile.transform.position, Quaternion.identity);
 
-					house = Instantiate(houses[houseModelIndex], settlement.transform.position, Quaternion.identity);
+					Vector3 houseObjectPos	= houseObject.transform.position;
+					houseObjectPos.y		= settlementTile.transform.position.y + (settlementTile.transform.localScale.y / 2) + (houseObject.transform.localScale.y / 2);
 
-					Vector3 pos = house.transform.position;
+					houseObject.transform.position	= houseObjectPos;
+					houseObject.transform.parent	= settlementTile.transform;
 
-					pos.y = settlement.transform.position.y + (settlement.transform.localScale.y / 2) + (house.transform.localScale.y / 2);
+					// Rotation
+					Vector3 lookPos = centerPos - houseObject.transform.position;
 
-					house.transform.position	= pos;
-					house.transform.parent		= settlement.transform;
+					lookPos.y = 0.0f;
+
+					Quaternion rotation = Quaternion.LookRotation(lookPos);
+
+					houseObject.transform.rotation = Quaternion.Slerp(houseObject.transform.rotation, rotation, 1.0f);
 
 				}
 				else
-					settlement = Instantiate(settlementTile, tiles[n].transform.position, Quaternion.identity, tiles[n].transform.parent);
+					settlementTile = Instantiate(settlementTileOBJ, tiles[n].transform.position, Quaternion.identity, tiles[n].transform.parent);
 
 				Destroy(tiles[n]);
 
-				tiles[n] = settlement;
+				tiles[n] = settlementTile;
 			}
 
 			houseModelIndex = ++houseModelIndex % houses.Length;
@@ -80,7 +91,7 @@ public class _SettlementGen : MonoBehaviour
 
 			availIndexes.RemoveAt(rand);
 
-			Vector3 settlementPos = new Vector3(tiles[index].transform.position.x, 1.0f, tiles[index].transform.position.z);
+			Vector3 settlementCenter = new Vector3(tiles[index].transform.position.x, 1.0f, tiles[index].transform.position.z);
 
 			settlements.Add(index, new List<int>());
 
@@ -89,16 +100,14 @@ public class _SettlementGen : MonoBehaviour
 				int _index = availIndexes[j];
 				Vector3 pos = new Vector3(tiles[_index].transform.position.x, 1.0f, tiles[_index].transform.position.z);
 
-				float dist = Vector3.Distance(settlementPos, pos);
+				float dist = Vector3.Distance(settlementCenter, pos);
 
 				if (dist <= tileSize * (neighbourRadius * 4))
 				{
 					availIndexes.RemoveAt(j);
 
 					if (dist <= tileSize * neighbourRadius)
-					{
 						settlements[index].Add(_index);
-					}
 
 					continue;
 				}

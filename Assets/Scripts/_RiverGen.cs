@@ -30,7 +30,7 @@ public class _RiverGen : MonoBehaviour
 			{
 				spawnedTile = Instantiate(waterTile, tiles[n].transform.position, Quaternion.identity);
 
-				spawnedTile.transform.parent = spawnedTile.transform.parent;
+				spawnedTile.transform.parent = tiles[n].transform.parent;
 
 				Destroy(tiles[n]);
 
