@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4535347253087305047}
   - component: {fileID: 2937240047271079384}
   - component: {fileID: 9024929475191964223}
-  - component: {fileID: 1357143943694610070}
   m_Layer: 0
   m_Name: Slot
   m_TagString: Untagged
@@ -48,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054398910595087964}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -79,19 +78,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1357143943694610070
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054398910595087964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5451358056718950609
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +89,6 @@ GameObject:
   - component: {fileID: 2769303693975888442}
   - component: {fileID: 8728621601910134788}
   - component: {fileID: 1892484749984073818}
-  - component: {fileID: 1924444368226689822}
   m_Layer: 0
   m_Name: Slot (4)
   m_TagString: Untagged
@@ -140,7 +125,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5451358056718950609}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -171,19 +156,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &1924444368226689822
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5451358056718950609}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5863642622226416128
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,9 +254,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422952fd1805c6149b0a76f07e4a7d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 0
-  mushroom: {fileID: 3365401819824558155, guid: 875797f885977e24aae973e3acad78aa,
+  mushroomOBJ: {fileID: 3365401819824558155, guid: 875797f885977e24aae973e3acad78aa,
     type: 3}
+  maxScale: 0.5
+  yOffset: -0.4
+  spawnMushroomInterval: 10
 --- !u!1 &7095872466633994606
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +270,6 @@ GameObject:
   - component: {fileID: 2470837357305847749}
   - component: {fileID: 7889936017404778753}
   - component: {fileID: 2461850030659328248}
-  - component: {fileID: 3397261858695187357}
   m_Layer: 0
   m_Name: Slot (3)
   m_TagString: Untagged
@@ -333,7 +306,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095872466633994606}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -364,19 +337,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3397261858695187357
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7095872466633994606}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7785433807721327022
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +348,6 @@ GameObject:
   - component: {fileID: 8012205884781416071}
   - component: {fileID: 746083473157050507}
   - component: {fileID: 2418439556617417653}
-  - component: {fileID: 4907985955296178105}
   m_Layer: 0
   m_Name: Slot (6)
   m_TagString: Untagged
@@ -425,7 +384,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7785433807721327022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -456,19 +415,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4907985955296178105
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7785433807721327022}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8053420904081612254
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +426,6 @@ GameObject:
   - component: {fileID: 831863812346065414}
   - component: {fileID: 2930093422190981911}
   - component: {fileID: 2684432002093117826}
-  - component: {fileID: 216110375186358846}
   m_Layer: 0
   m_Name: Slot (5)
   m_TagString: Untagged
@@ -517,7 +462,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8053420904081612254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -548,19 +493,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &216110375186358846
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053420904081612254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8757509950048242020
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +504,6 @@ GameObject:
   - component: {fileID: 5379105687222005083}
   - component: {fileID: 5654146621446715622}
   - component: {fileID: 6228812006086413412}
-  - component: {fileID: 7061172348013743943}
   m_Layer: 0
   m_Name: Slot (2)
   m_TagString: Untagged
@@ -609,7 +540,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8757509950048242020}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -640,19 +571,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7061172348013743943
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8757509950048242020}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8801458288668065327
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +582,6 @@ GameObject:
   - component: {fileID: 5713097030341669339}
   - component: {fileID: 455018119555662130}
   - component: {fileID: 3332885448435823058}
-  - component: {fileID: 3288688369377047282}
   m_Layer: 0
   m_Name: Slot (1)
   m_TagString: Untagged
@@ -701,7 +618,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8801458288668065327}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -732,16 +649,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3288688369377047282
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8801458288668065327}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

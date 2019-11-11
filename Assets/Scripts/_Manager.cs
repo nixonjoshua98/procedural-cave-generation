@@ -29,8 +29,7 @@ public class _Manager : MonoBehaviour
         riverGen        = GetComponent<_RiverGen>();
 
 
-        if (SEED == 0)
-			SEED = Random.Range(0, 99999);
+        if (SEED == 0) SEED = Random.Range(0, 99999);
 
 		Debug.Log("SEED: " + SEED);
 
@@ -48,13 +47,9 @@ public class _Manager : MonoBehaviour
 		tiles = new GameObject[TOTAL_TILES];
 
 		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-
 		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-
 		riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-
 		dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-
 		decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }
