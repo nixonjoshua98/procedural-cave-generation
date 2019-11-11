@@ -36,7 +36,7 @@ public class _Manager : MonoBehaviour
 
 		Random.InitState(this.SEED);
 
-        WORLD_SIZE = Random.Range(48, 64);
+        WORLD_SIZE = Random.Range(64, 96);
 
 		Debug.Log("WORLD SIZE: " + WORLD_SIZE);
 

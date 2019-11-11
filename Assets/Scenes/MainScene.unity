@@ -436,10 +436,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settlementTileOBJ: {fileID: 3357011279861765300, guid: c3780e732e383764184813ce54cdcca2,
     type: 3}
+  settlementCenterTileOBJ: {fileID: 3889663102507407729, guid: e3b3fc561695254498ee42ea25d32954,
+    type: 3}
   houseTileOBJ: {fileID: 1361757977714630176, guid: 61b22c4e4eb10b147bb57f84c8a84f3d,
     type: 3}
   houses:
-  - {fileID: 131800790274001153, guid: fad92e9321f17e14f858cafce0051bdf, type: 3}
   - {fileID: 2645677035461214375, guid: 2bed1894aeba1ec4ab7064da884dcb8a, type: 3}
   - {fileID: 270814724905568093, guid: 93f7f51dfa29e924d9b2f0096c018cc1, type: 3}
   - {fileID: 5901706285588546373, guid: 94c67cf9ce1e06f42b2b62701a700554, type: 3}

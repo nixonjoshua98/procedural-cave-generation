@@ -283,7 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  mushroom: {fileID: 0}
+  mushroom: {fileID: 3365401819824558155, guid: 875797f885977e24aae973e3acad78aa,
+    type: 3}
 --- !u!1 &7095872466633994606
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,14 +11,14 @@ public class _MushroomTile : _DynamicObject
 
     [Header("Objects")]
     public GameObject mushroom;
-    private GameObject[] mushroomSlots;
+    private List<GameObject> mushroomSlots;
 
     [Header("Attributes")]
     private float growTime = 10.0f;
 
-    private void Start()
+    private void GetMushroomSlots()
     {
-        mushroomSlots = new GameObject[transform.childCount];
+        mushroomSlots = new List<GameObject>();
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -33,6 +33,6 @@ public class _MushroomTile : _DynamicObject
 
     public override void Generate(int worldSize, int tileSize, ref GameObject[] tiles)
     {
-
+        GetMushroomSlots();
     }
 }
