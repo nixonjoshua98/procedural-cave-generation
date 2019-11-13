@@ -10,9 +10,13 @@ TagManager:
   - House
   - TilesParent
   - DecorationTile
-  - Decoration
   - MushroomTile
   - WaterTile
+  - SettlementCenterTile
+  - Undefined
+  - Decoration
+  - Mushroom
+  - BonfireTile
   layers:
   - Default
   - TransparentFX
