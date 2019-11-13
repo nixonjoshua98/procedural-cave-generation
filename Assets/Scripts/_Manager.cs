@@ -14,7 +14,7 @@ public class _Manager : MonoBehaviour
 	[HideInInspector] public GameObject[] tiles;
 
 	// Generators
-	_EmptyTileGen		emptyTileGen;
+	EmptyTileGen		emptyTileGen;
 	_SettlementGen		settlementGen;
 	_DecorationTileGen	decoGen;
     _DynamicTileGen     dyanmicTileGen;
@@ -22,7 +22,7 @@ public class _Manager : MonoBehaviour
 
 	private void Awake()
 	{
-		emptyTileGen	= GetComponent<_EmptyTileGen>();
+		emptyTileGen	= GetComponent<EmptyTileGen>();
 		settlementGen	= GetComponent<_SettlementGen>();
 		decoGen			= GetComponent<_DecorationTileGen>();
         dyanmicTileGen  = GetComponent<_DynamicTileGen>();
@@ -46,10 +46,10 @@ public class _Manager : MonoBehaviour
 	{
 		tiles = new GameObject[TOTAL_TILES];
 
-		emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
-		decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		//emptyTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		//settlementGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		//riverGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		//dyanmicTileGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
+		//decoGen.Generate(WORLD_SIZE, TILE_SIZE, ref tiles);
 	}
 }

@@ -17,6 +17,7 @@ TagManager:
   - Decoration
   - Mushroom
   - BonfireTile
+  - Settlement
   layers:
   - Default
   - TransparentFX

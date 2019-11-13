@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class _RiverGen : MonoBehaviour
+public class RiverGen : BaseClass
 {
+	[Header("Gameobjects")]
 	public GameObject waterTile;
 
+	[Header("Generation")]
+	public int updatesPerFrame;
+	public bool isDone = false;
 
-    public void Generate(int worldSize, int tileSize, ref GameObject[] tiles)
-    {
-		GameObject currentTile = GetStartObject(worldSize, tileSize, ref tiles);
+	public void Generate()
+	{
+		StartCoroutine(IGenerate());
+	}
 
-		List<int> riverTiles = new List<int>();
+	public IEnumerator IGenerate()
+	{
+		int updatesThisFrame	= 0;
+		GameObject[] tiles		= emptyTiles;
+		GameObject currentTile	= tiles[Random.Range(0, tiles.Length)];
+		List<int> riverTiles	= new List<int>();
 
-		for (int i = 0; i < worldSize * 6; i++)
+		for (int i = 0; i < worldSize * 7; i++)
 		{
 			List<int> neighbourIndexes = GetNeighbours(currentTile, tileSize, ref tiles);
 
@@ -26,34 +36,33 @@ public class _RiverGen : MonoBehaviour
 
 			foreach (int n in neighbourIndexes)
 			{
-				GameObject spawnedTile = Instantiate(waterTile, tiles[n].transform.position, Quaternion.identity);
-
-				spawnedTile.transform.parent = tiles[n].transform.parent;
+				GameObject spawnedRiverTile			= Instantiate(waterTile, tiles[n].transform.position, Quaternion.identity);
+				spawnedRiverTile.transform.parent	= riverTilesParent.transform;
 
 				Destroy(tiles[n]);
 
-				tiles[n] = spawnedTile;
+				tiles[n] = spawnedRiverTile;
 
 				riverTiles.Add(n);
+
+				// - - - - -
+
+				// Wait to show generation
+				if (updatesThisFrame == updatesPerFrame)
+				{
+					updatesThisFrame = 0;
+
+					yield return new WaitForEndOfFrame();
+				}
+
+				++updatesThisFrame;
+
 			}
 
-			currentTile = tiles[ neighbourIndexes [ Random.Range( 0, neighbourIndexes.Count ) ] ];
+			currentTile = tiles[neighbourIndexes[Random.Range(0, neighbourIndexes.Count)]];
 		}
 
-
-	}
-
-	public GameObject GetStartObject(int worldSize, int tileSize, ref GameObject[] tiles)
-	{
-		List<GameObject> outerTiles = new List<GameObject>();
-
-		for (int i = 0; i < tiles.Length; i++)
-		{
-			if (tiles[i].CompareTag("EmptyTile"))
-				outerTiles.Add(tiles[i]);
-		}
-
-		return outerTiles[Random.Range(0, outerTiles.Count)];
+		isDone = true;
 	}
 
 	public List<int> GetNeighbours(GameObject centerTile, int tileSize, ref GameObject[] tiles)
