@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 253102070}
   - component: {fileID: 253102071}
   - component: {fileID: 253102072}
+  - component: {fileID: 253102073}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -155,8 +156,8 @@ MonoBehaviour:
   worldSize: 0
   tileSize: 0
   numSettlements: 0
+  numMushroomAreas: 0
   emptyTilesParent: {fileID: 1626801024}
-  riverTilesParent: {fileID: 578598354}
 --- !u!4 &253102069
 Transform:
   m_ObjectHideFlags: 0
@@ -218,6 +219,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterTile: {fileID: 5572497028959157015, guid: a150deaad46aec4429f164b025e59251,
+    type: 3}
+  riverTilesParent: {fileID: 578598354}
+  updatesPerFrame: 5
+  isDone: 0
+--- !u!114 &253102073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253102067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3f1619ab278a04f970c6b9c06c07ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mushroomTile: {fileID: 4525545158806111358, guid: c6cb7c7f7bf395d47b69049d13d34e34,
+    type: 3}
+  muchroomPatchParent: {fileID: 1894222175367677293, guid: 09c5bd0b52beb3549bd452a2b905e127,
     type: 3}
   updatesPerFrame: 5
   isDone: 0

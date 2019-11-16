@@ -42,17 +42,8 @@ public class SettlementGen : BaseClass
 
 				Destroy(tile);
 
-				// - - - - -
-
-				// Wait to show generation
-				if (updatesThisFrame == updatesPerFrame)
-				{
-					updatesThisFrame = 0;
-
+				if (++updatesThisFrame % updatesPerFrame == 0)
 					yield return new WaitForEndOfFrame();
-				}
-
-				++updatesThisFrame;
 			}
 		}
 
@@ -61,7 +52,7 @@ public class SettlementGen : BaseClass
 
 	private void GetPotentialSettlements()
 	{
-		List<GameObject> availableTiles	= emptyTiles.ToList();
+		List<GameObject> availableTiles = emptyTilesList;
 
 		const int radius	= 5;
 		int settlementIndex = 0;

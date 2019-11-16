@@ -9,7 +9,6 @@ public class BaseClass : MonoBehaviour
 	public int tileSize { get => Controller.instance.tileSize; }
 	public int numSettlements { get => Controller.instance.numSettlements; }
 	public GameObject emptyTilesParent { get => Controller.instance.emptyTilesParent; }
-	public GameObject riverTilesParent { get => Controller.instance.riverTilesParent; }
 	public GameObject[] emptyTiles
 	{
 		get

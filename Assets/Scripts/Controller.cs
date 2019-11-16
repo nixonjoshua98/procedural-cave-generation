@@ -9,18 +9,19 @@ public class Controller : MonoBehaviour
 	[HideInInspector] public int worldSize;
 	[HideInInspector] public int tileSize;
 	[HideInInspector] public int numSettlements;
+	[HideInInspector] public int numMushroomAreas;
 
-	[Header("Parents")]
+	[Header("Gameobjects")]
 	public GameObject emptyTilesParent;
-	public GameObject riverTilesParent;
 
 	private void Awake()
 	{
 		instance = this;
 
-		worldSize		= 64;
-		tileSize		= 3;
-		numSettlements	= 5;
+		worldSize			= 64;
+		tileSize			= 3;
+		numSettlements		= 5;
+		numMushroomAreas	= 4;
 	}
 
 	private void Start()
@@ -39,6 +40,11 @@ public class Controller : MonoBehaviour
 		var settlementGen = GetComponent<SettlementGen>();
 		settlementGen.Generate();
 		yield return new WaitUntil(() => settlementGen.isDone);
+
+		// Mushroom
+		var mushGen = GetComponent<MushPatchGen>();
+		mushGen.Generate();
+		yield return new WaitUntil(() => mushGen.isDone);
 
 		// River
 		var riverGen = GetComponent<RiverGen>();
