@@ -7,10 +7,10 @@ using LibNoise.Generator;
 using LibNoise.Operator;
 
 
-public class EmptyTileGen : BaseClass
+public class RoofGen : BaseClass
 {
 	[Header("Gameobjects")]
-	public GameObject emptyTile;
+	public GameObject roofTile;
 
 	private Perlin perlin;
 	private Noise2D heightMap;
@@ -22,13 +22,13 @@ public class EmptyTileGen : BaseClass
 	public void Generate()
 	{
 		SetupHeightMap();
-		StartCoroutine(IGenerateEmptyTerrain());
+		StartCoroutine(IGenerateRoof());
 	}
 
-	private IEnumerator IGenerateEmptyTerrain()
+	private IEnumerator IGenerateRoof()
 	{
-		int updatesThisFrame	= 0;
-		float randomFloat		= Random.Range(4.562f, 15.945f);
+		int updatesThisFrame = 0;
+		float randomFloat = Random.Range(4.562f, 15.945f);
 
 		// Centers the world
 		float negativeCoord = -((worldSize / 2) * tileSize) + (worldSize % 2 == 0 ? tileSize / 2 : 0.0f);
@@ -42,9 +42,9 @@ public class EmptyTileGen : BaseClass
 				// Get height from the perlin noise
 				double height = perlin.GetValue(pos.x * randomFloat, pos.y, pos.z * randomFloat);
 
-				pos.y = (float)height;
+				pos.y = (float)height + 32.0f;
 
-				GameObject spawnedTile = Instantiate(emptyTile, pos, Quaternion.identity, emptyTilesParent.transform);
+				GameObject spawnedTile = Instantiate(roofTile, pos, Quaternion.identity, roofTilesParent.transform);
 
 				// Wait to show generation
 				if (updatesThisFrame++ % updatesPerFrame == 0)
@@ -57,7 +57,8 @@ public class EmptyTileGen : BaseClass
 
 	private void SetupHeightMap()
 	{
-		perlin		= new Perlin();
-		heightMap	= new Noise2D(worldSize, worldSize, perlin);
+		perlin = new Perlin(3, 3, 2, 4, Random.seed, QualityMode.High);
+
+		heightMap = new Noise2D(worldSize, worldSize, perlin);
 	}
 }

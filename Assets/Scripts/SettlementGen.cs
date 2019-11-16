@@ -63,6 +63,9 @@ public class SettlementGen : BaseClass
 		{
 			isWorking = false;
 
+			if (availableTiles.Count == 0)
+				break;
+
 			int settlementCenterIndex	= Random.Range(0, availableTiles.Count);
 			GameObject settlementCenter = availableTiles[settlementCenterIndex];
 
@@ -81,11 +84,12 @@ public class SettlementGen : BaseClass
 				float dist = Vector3.Distance(tilePos, centerPos);
 
 				// Within range
-				if (dist <= radius * tileSize)
+				if (dist <= (radius + 2) * tileSize)
 				{
-					availableTiles.RemoveAt(i);
+					if (dist <= radius * tileSize)
+						settlements[settlementIndex].Add(tile);
 
-					settlements[settlementIndex].Add(tile);
+					availableTiles.RemoveAt(i);
 
 					isWorking = true;
 				}

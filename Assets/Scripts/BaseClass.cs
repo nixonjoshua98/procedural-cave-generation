@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BaseClass : MonoBehaviour
 {
+	[HideInInspector]
 	public Quaternion[] tileRotations =
 	{
 		Quaternion.Euler(0, 0, 0),
@@ -18,6 +19,7 @@ public class BaseClass : MonoBehaviour
 	public int numSettlements { get => Controller.instance.numSettlements; }
 	public int numMushPatches { get => Controller.instance.numMushPatches; }
 	public GameObject emptyTilesParent { get => Controller.instance.emptyTilesParent; }
+	public GameObject roofTilesParent { get => Controller.instance.roofTilesParent; }
 	public GameObject[] emptyTiles
 	{
 		get

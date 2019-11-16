@@ -46,6 +46,8 @@ public class RiverGen : BaseClass
 
 				riverTiles.Add(n);
 
+				// - - - - -
+
 				if (++updatesThisFrame % updatesPerFrame == 0)
 					yield return new WaitForEndOfFrame();
 

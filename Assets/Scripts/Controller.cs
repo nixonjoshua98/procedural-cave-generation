@@ -13,12 +13,13 @@ public class Controller : MonoBehaviour
 
 	[Header("Gameobjects")]
 	public GameObject emptyTilesParent;
+	public GameObject roofTilesParent;
 
 	private void Awake()
 	{
 		instance = this;
 
-		worldSize		= 64;
+		worldSize		= 65;
 		tileSize		= 3;	// CONSTANT
 		numSettlements	= 5;
 		numMushPatches	= 3;
@@ -26,6 +27,9 @@ public class Controller : MonoBehaviour
 
 	private void Start()
 	{
+		Debug.Log("SEED: " + Random.seed);
+
+
 		StartCoroutine(IGenerate());
 	}
 
@@ -36,19 +40,24 @@ public class Controller : MonoBehaviour
 		emptyTileGen.Generate();
 		yield return new WaitUntil(() => emptyTileGen.isDone);
 
-		// Settlements
-		var settlementGen = GetComponent<SettlementGen>();
-		settlementGen.Generate();
-		yield return new WaitUntil(() => settlementGen.isDone);
+		// River
+		var riverGen = GetComponent<RiverGen>();
+		riverGen.Generate();
+		yield return new WaitUntil(() => riverGen.isDone);
+
+		// Roof
+		var roofGen = GetComponent<RoofGen>();
+		roofGen.Generate();
+		yield return new WaitUntil(() => roofGen.isDone);
 
 		// Mushroom
 		var mushGen = GetComponent<MushPatchGen>();
 		mushGen.Generate();
 		yield return new WaitUntil(() => mushGen.isDone);
 
-		// River
-		var riverGen = GetComponent<RiverGen>();
-		riverGen.Generate();
-		yield return new WaitUntil(() => riverGen.isDone);
+		// Settlements
+		var settlementGen = GetComponent<SettlementGen>();
+		settlementGen.Generate();
+		yield return new WaitUntil(() => settlementGen.isDone);
 	}
 }
