@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour
 	[HideInInspector] public int worldSize;
 	[HideInInspector] public int tileSize;
 	[HideInInspector] public int numSettlements;
-	[HideInInspector] public int numMushroomAreas;
+	[HideInInspector] public int numMushPatches;
 
 	[Header("Gameobjects")]
 	public GameObject emptyTilesParent;
@@ -18,10 +18,10 @@ public class Controller : MonoBehaviour
 	{
 		instance = this;
 
-		worldSize			= 64;
-		tileSize			= 3;
-		numSettlements		= 5;
-		numMushroomAreas	= 4;
+		worldSize		= 64;
+		tileSize		= 3;	// CONSTANT
+		numSettlements	= 5;
+		numMushPatches	= 3;
 	}
 
 	private void Start()

@@ -5,9 +5,18 @@ using UnityEngine;
 
 public class BaseClass : MonoBehaviour
 {
+	public Quaternion[] tileRotations =
+	{
+		Quaternion.Euler(0, 0, 0),
+		Quaternion.Euler(0, 90, 0),
+		Quaternion.Euler(0, 180, 0),
+		Quaternion.Euler(0, 270, 0),
+	};
+
 	public int worldSize { get => Controller.instance.worldSize; }
 	public int tileSize { get => Controller.instance.tileSize; }
 	public int numSettlements { get => Controller.instance.numSettlements; }
+	public int numMushPatches { get => Controller.instance.numMushPatches; }
 	public GameObject emptyTilesParent { get => Controller.instance.emptyTilesParent; }
 	public GameObject[] emptyTiles
 	{

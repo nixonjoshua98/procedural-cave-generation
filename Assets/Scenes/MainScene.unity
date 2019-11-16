@@ -156,7 +156,7 @@ MonoBehaviour:
   worldSize: 0
   tileSize: 0
   numSettlements: 0
-  numMushroomAreas: 0
+  numMushPatches: 0
   emptyTilesParent: {fileID: 1626801024}
 --- !u!4 &253102069
 Transform:

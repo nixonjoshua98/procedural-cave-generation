@@ -26,7 +26,7 @@ public class MushPatchGen : BaseClass
 
 		areas.Sort((p, q) => q.Count.CompareTo(p.Count));
 
-		for (int i = 0; i < numSettlements; i++)
+		for (int i = 0; i < numMushPatches; i++)
 		{
 			List<GameObject> muchPatch	= areas[i];
 			GameObject parent			= Instantiate(muchroomPatchParent);
@@ -37,13 +37,16 @@ public class MushPatchGen : BaseClass
 			{
 				GameObject newMushTile = Instantiate(mushroomTile, tile.transform.position, Quaternion.identity);
 
-				newMushTile.transform.parent = parent.transform;
+				newMushTile.transform.rotation	= tileRotations[Random.Range(0, tileRotations.Length)];
+				newMushTile.transform.parent	= parent.transform;
 
 				Destroy(tile);
 
 				if (++updatesThisFrame % updatesPerFrame == 0)
 					yield return new WaitForEndOfFrame();
 			}
+
+			parent.GetComponent<MushPatch>().Generate(); // Call once all children have been added
 		}
 
 		isDone = true;
