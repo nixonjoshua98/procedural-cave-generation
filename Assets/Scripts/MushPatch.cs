@@ -14,7 +14,7 @@ public class MushPatch : MonoBehaviour
 
 	private void Start()
 	{
-		spawnDelay = Random.Range(4.0f, 12.0f);
+		spawnDelay = Random.Range(4.0f, 8.0f);
 	}
 
 	public void Generate()
@@ -41,6 +41,8 @@ public class MushPatch : MonoBehaviour
 
 		if (timer >= spawnDelay)
 		{
+			spawnDelay = Random.Range(4.0f, 12.0f);
+
 			timer = 0.0f;
 
 			SpawnMushroom();
@@ -49,14 +51,14 @@ public class MushPatch : MonoBehaviour
 
 	void SpawnMushroom()
 	{
-		if (mushroomSlots.Count == 0) return;
+		if (mushroomSlots.Count == 0)
+			return;
 
 		int rand		= Random.Range(0, mushroomSlots.Count);
 		GameObject slot = mushroomSlots[rand];
 
-		GameObject spawnedMush = Instantiate(mushroom, slot.transform.position, Quaternion.identity);
-
-		spawnedMush.transform.parent = slot.transform.parent;
+		GameObject spawnedMush			= Instantiate(mushroom, slot.transform.position, Quaternion.identity);
+		spawnedMush.transform.parent	= slot.transform.parent;
 
 		mushroomSlots.RemoveAt(rand);
 

@@ -46,9 +46,9 @@ public class Controller : MonoBehaviour
 		yield return new WaitUntil(() => riverGen.isDone);
 
 		// Roof
-		var roofGen = GetComponent<RoofGen>();
-		roofGen.Generate();
-		yield return new WaitUntil(() => roofGen.isDone);
+		//var roofGen = GetComponent<RoofGen>();
+		//roofGen.Generate();
+		//yield return new WaitUntil(() => roofGen.isDone);
 
 		// Mushroom
 		var mushGen = GetComponent<MushPatchGen>();

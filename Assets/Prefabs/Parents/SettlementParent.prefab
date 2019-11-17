@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3909407727430139860}
+  - component: {fileID: -4049428716251111541}
   m_Layer: 0
   m_Name: SettlementParent
   m_TagString: Settlement
@@ -30,3 +31,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4049428716251111541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766830820090059637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a28db0418101f47ade7a7e64a0d3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  houseObjects:
+  - {fileID: 2645677035461214375, guid: 2bed1894aeba1ec4ab7064da884dcb8a, type: 3}
+  - {fileID: 270814724905568093, guid: 93f7f51dfa29e924d9b2f0096c018cc1, type: 3}
+  - {fileID: 5901706285588546373, guid: 94c67cf9ce1e06f42b2b62701a700554, type: 3}
+  - {fileID: 2368720174591648864, guid: f41d19eaf6308a6419fb5c2122e82c75, type: 3}
+  - {fileID: 9003237946042587717, guid: 081640334807bca45867790a76a095da, type: 3}

@@ -28,10 +28,13 @@ public class SettlementGen : BaseClass
 
 		settlements.Sort((p, q) => q.Count.CompareTo(p.Count));
 
+		GameObject parent;
+
 		for (int i = 0; i < numSettlements; i++)
 		{
 			List<GameObject> settlement = settlements[i];
-			GameObject parent			= Instantiate(settlementParent);
+
+			parent = Instantiate(settlementParent);
 
 			parent.name = "Settlement " + i;
 
@@ -45,6 +48,8 @@ public class SettlementGen : BaseClass
 				if (++updatesThisFrame % updatesPerFrame == 0)
 					yield return new WaitForEndOfFrame();
 			}
+
+			parent.GetComponent<Settlement>().Generate();
 		}
 
 		isDone = true;
