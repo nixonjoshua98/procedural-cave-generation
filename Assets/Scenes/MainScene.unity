@@ -193,8 +193,12 @@ MonoBehaviour:
   - {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
   emptyTile: {fileID: 6201572238294390458, guid: e9a7d181cf8bbc14d81af1d45d1b76be,
     type: 3}
-  updatesPerFrame: 40
+  updatesPerFrame: 250
   isDone: 0
+  freq: 0.05
+  lacunarity: 2
+  persistance: 1
+  octaves: 2
 --- !u!114 &253102071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +286,7 @@ MonoBehaviour:
   - {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
   roofTile: {fileID: 8421207101578260084, guid: 20f14161f51ebfa4b8eaa50875e0326d,
     type: 3}
-  updatesPerFrame: 40
+  updatesPerFrame: 100
   isDone: 0
 --- !u!1 &578598354
 GameObject:

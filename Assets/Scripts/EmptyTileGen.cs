@@ -19,7 +19,12 @@ public class EmptyTileGen : BaseClass
 	public int updatesPerFrame;
 	public bool isDone = false;
 
-	public void Generate()
+    public double freq;
+    public double lacunarity;
+    public double persistance;
+    public int octaves;
+
+    public void Generate()
 	{
 		SetupHeightMap();
 		StartCoroutine(IGenerateEmptyTerrain());
@@ -40,7 +45,7 @@ public class EmptyTileGen : BaseClass
 				Vector3 pos = new Vector3(negativeCoord + (x * tileSize), 0, -(negativeCoord + (y * tileSize)));
 
 				// Get height from the perlin noise
-				double height = perlin.GetValue(pos.x * randomFloat, pos.y, pos.z * randomFloat);
+				double height = perlin.GetValue(pos.x, pos.y, pos.z);
 
 				pos.y = (float)height;
 
@@ -57,7 +62,7 @@ public class EmptyTileGen : BaseClass
 
 	private void SetupHeightMap()
 	{
-		perlin		= new Perlin();
-		heightMap	= new Noise2D(worldSize, worldSize, perlin);
+        perlin = new Perlin(freq, lacunarity, persistance, octaves, Random.seed, QualityMode.High);
+        heightMap	= new Noise2D(worldSize, worldSize, perlin);
 	}
 }

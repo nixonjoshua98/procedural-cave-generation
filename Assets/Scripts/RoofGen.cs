@@ -18,8 +18,7 @@ public class RoofGen : BaseClass
 	[Header("Generation")]
 	public int updatesPerFrame;
 	public bool isDone = false;
-
-	public void Generate()
+    public void Generate()
 	{
 		SetupHeightMap();
 		StartCoroutine(IGenerateRoof());
@@ -57,7 +56,7 @@ public class RoofGen : BaseClass
 
 	private void SetupHeightMap()
 	{
-		perlin = new Perlin(3, 3, 2, 4, Random.seed, QualityMode.High);
+		perlin = new Perlin(0.1, 0, 0, 0, Random.seed, QualityMode.High);
 
 		heightMap = new Noise2D(worldSize, worldSize, perlin);
 	}
