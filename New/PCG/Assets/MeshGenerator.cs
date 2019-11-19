@@ -16,15 +16,20 @@ public static class MeshGenerator
 
 		int vertexIndex = 0;
 
+		float maxDistanceFromCenter = Vector2.Distance(new Vector2(width, height), Vector2.zero);
+
 		for (int y = 0; y < height; y++)
 		{
 			for (int x = 0; x < width; x++)
 			{
-				meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier, topLeftZ - y);
+				float distanceFromCenterPercent = Vector2.Distance(new Vector2(x, y), Vector2.zero);
+
+				float heightValue = heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier;
+
+				meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightValue, topLeftZ - y);
 
 				meshData.uvs[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
 
-				// Ignore the unneeded vertices
 				if (x < width - 1 && y < height - 1)
 				{
 					meshData.AddTriangle(vertexIndex, vertexIndex + width + 1, vertexIndex + width);
@@ -65,15 +70,16 @@ public class MeshData
 
 	public Mesh CreateMesh()
 	{
-		Mesh mesh = new Mesh();
-
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
-		mesh.uv = uvs;
+		Mesh mesh = new Mesh
+		{
+			vertices = vertices,
+			triangles = triangles,
+			uv = uvs
+		};
 
 		mesh.RecalculateNormals();
 
-		//mesh.Optimize();
+		mesh.Optimize();
 
 		return mesh;
 	}
