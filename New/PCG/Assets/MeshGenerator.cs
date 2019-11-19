@@ -4,63 +4,77 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-	static Vector3[] startingVertices = {
-			new Vector3 (-0.5f,     -0.5f,   -0.5f),
-			new Vector3 (+0.5f,     -0.5f,   -0.5f),
-			new Vector3 (+0.5f,     +0.5f,   -0.5f),
-			new Vector3 (-0.5f,     +0.5f,   -0.5f),
-			new Vector3 (-0.5f,     +0.5f,   +0.5f),
-			new Vector3 (+0.5f,     +0.5f,   +0.5f),
-			new Vector3 (+0.5f,     -0.5f,   +0.5f),
-			new Vector3 (-0.5f,     -0.5f,   +0.5f),
-		};
-
-	static int[] startingTriangles = {
-			0, 2, 1, 0, 3, 2,	// Front
-			2, 3, 4, 2, 4, 5,	// Top
-			1, 2, 5, 1, 5, 6,	// Right
-			0, 7, 4, 0, 4, 3,	// Left
-			5, 4, 7, 5, 7, 6,	// Back
-			0, 6, 7, 0, 1, 6	// Bottom
-		};
-
-	public static void DrawCubes(Vector3[] cubePositions, int worldSize, Mesh mesh)
+	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve heightCurve)
 	{
+		int width = heightMap.GetLength(0);
+		int height = heightMap.GetLength(1);
 
-		int[] triangles = new int[startingTriangles.Length * (worldSize * worldSize)];
-		Vector3[] vertices = new Vector3[startingVertices.Length * (worldSize * worldSize)];
+		float topLeftX = (width - 1) / -2.0f;
+		float topLeftZ = (height - 1) / 2.0f;
 
-		mesh.Clear();
+		MeshData meshData = new MeshData(width, height);
 
-		for (int i = 0; i < cubePositions.Length; i++)
+		int vertexIndex = 0;
+
+		for (int y = 0; y < height; y++)
 		{
-			Vector3 pos = cubePositions[i];
-
-			// Add vertices
-			for (int j = 0; j < startingVertices.Length; j++)
+			for (int x = 0; x < width; x++)
 			{
-				int index = (i * startingVertices.Length) + j;
-				Vector3 v = startingVertices[j] + pos;
+				meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier, topLeftZ - y);
 
-				vertices[index] = v;
-			}
+				meshData.uvs[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
 
-			// Add triangles
-			for (int j = 0; j < startingTriangles.Length; j++)
-			{
-				int index = (i * startingTriangles.Length) + j;
-				int value = startingTriangles[j] + (i * startingVertices.Length);
+				// Ignore the unneeded vertices
+				if (x < width - 1 && y < height - 1)
+				{
+					meshData.AddTriangle(vertexIndex, vertexIndex + width + 1, vertexIndex + width);
+					meshData.AddTriangle(vertexIndex + width + 1, vertexIndex, vertexIndex + 1);
+				}
 
-				triangles[index] = value;
+				++vertexIndex;
 			}
 		}
 
+		return meshData;
+	}
+}
+
+public class MeshData
+{
+	public Vector3[] vertices;
+	public int[] triangles;
+	public Vector2[] uvs;
+
+	private int triangleIndex = 0;
+
+	public MeshData(int width, int height)
+	{
+		vertices	= new Vector3[width * height];
+		uvs			= new Vector2[width * height];
+		triangles	= new int[(width - 1) * (height - 1) * 6];
+	}
+
+	public void AddTriangle(int a, int b, int c)
+	{
+		triangles[triangleIndex] = a;
+		triangles[triangleIndex + 1] = b;
+		triangles[triangleIndex + 2] = c;
+
+		triangleIndex += 3;
+	}
+
+	public Mesh CreateMesh()
+	{
+		Mesh mesh = new Mesh();
+
 		mesh.vertices = vertices;
-
 		mesh.triangles = triangles;
-
-		mesh.Optimize();
+		mesh.uv = uvs;
 
 		mesh.RecalculateNormals();
+
+		//mesh.Optimize();
+
+		return mesh;
 	}
 }

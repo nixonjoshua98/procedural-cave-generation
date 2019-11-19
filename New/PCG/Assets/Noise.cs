@@ -8,18 +8,18 @@ using LibNoise.Operator;
 
 public static class Noise
 {
-	public static float[,] GenerateNoiseMap(int worldSize, float scale, double frequency, double lacunarity, double persistance, int octaves)
+	public static float[,] GenerateNoiseMap(int worldWidth, int worldHeight, double frequency, double lacunarity, double persistance, int octaves, int seed)
 	{
-		Perlin perlin = new Perlin(frequency, lacunarity, persistance, octaves, Random.Range(0, worldSize * worldSize), QualityMode.High);
+		Perlin perlin = new Perlin(frequency, lacunarity, persistance, octaves, seed, QualityMode.High);
 
-		float[,] map = new float[worldSize, worldSize];
+		float[,] map = new float[worldWidth, worldHeight];
 
-		for (int y = 0; y < worldSize; y++)
+		for (int y = 0; y < worldHeight; y++)
 		{
-			for (int x = 0; x < worldSize; x++)
+			for (int x = 0; x < worldWidth; x++)
 			{
-				float _x = x / scale;
-				float _y = y / scale;
+				float _x = x;
+				float _y = y;
 
 				map[x, y] = (float) perlin.GetValue(_x, 0.0f, _y);
 			}
