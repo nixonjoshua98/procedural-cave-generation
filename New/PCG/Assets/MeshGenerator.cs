@@ -31,7 +31,7 @@ public static class MeshGenerator
 				float heightValue = valueFromCurve * heightMultiplier;
 
 				// Ignore water etc.
-				if (valueFromCurve > 0.0f)
+				if (valueFromCurve > -0.5f)
 				{
 					heightValue += distanceFromCenter;
 
