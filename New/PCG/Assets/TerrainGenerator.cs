@@ -7,7 +7,7 @@ public class TerrainGenerator : MonoBehaviour
 	[Header("Perlin Noise")]
 
 	[Range(0.0f, 0.25f)] public double frequency;
-	[Range(0.0f, 5.0f)] public double lacunarity;
+	[Range(0.0f, 1.0f)] public double lacunarity;
 	[Range(0.0f, 2.0f)] public double persistance;
 	[Range(0, 10)]  public int octaves;
 
@@ -16,17 +16,19 @@ public class TerrainGenerator : MonoBehaviour
 
 	[Header("World Attributes")]
 
-	public int tileSize;
+	[Range(8, 128)] public int tileSize;
+
+	[Space]
 
 	[Range(16, 250)] public int worldWidth;
 	[Range(16, 250)] public int worldHeight;
 
-	[Space]
+	[Header("Border Attributes")]
+	[Range(1.0f, 16.0f)] public float borderHeightMultiplier;
+	[Range(16, 250)] public int borderSize;
 
+	[Header("Mesh Attributes")]
 	public float meshHeightMultiplier;
-
-	[Space]
-
 	public AnimationCurve meshHeightCurve;
 
 	[Space]
@@ -50,13 +52,13 @@ public class TerrainGenerator : MonoBehaviour
 			colorMap[i] = terrainMap[i].color;
 
 
-		TerrainDisplay display = FindObjectOfType<TerrainDisplay>();
+		TerrainDisplay display = GetComponent<TerrainDisplay>();
 
 		Texture2D t = TextureGenerator.TextureFromColorMap(colorMap, worldWidth, worldHeight);
-		MeshData m = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve);
+		MeshData m = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, borderSize, borderHeightMultiplier, meshHeightCurve);
 
 		foreach (Transform child in tileParent.transform)
-			Destroy(child.gameObject);
+			DestroyImmediate(child.gameObject);
 
 		display.DrawMesh(m, t);
 
@@ -78,11 +80,11 @@ public class TerrainGenerator : MonoBehaviour
 					v.x = (v.x * tileSize) + (tileSize / 2);
 					v.z = (v.z * tileSize) - (tileSize / 2);
 
-					GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+					//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-					cube.transform.position = v;
-					cube.transform.localScale = new Vector3(tileSize, 1.0f, tileSize);
-					cube.transform.parent = tileParent.transform;
+					//cube.transform.position = v;
+					//cube.transform.localScale = new Vector3(tileSize, 1.0f, tileSize);
+					//cube.transform.parent = tileParent.transform;
 				}
 			}
 		}

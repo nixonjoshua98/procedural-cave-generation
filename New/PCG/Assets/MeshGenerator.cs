@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, AnimationCurve heightCurve)
+	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, float borderSize, float borderHeightMultiplier, AnimationCurve heightCurve)
 	{
 		int width = heightMap.GetLength(0);
 		int height = heightMap.GetLength(1);
@@ -16,18 +16,34 @@ public static class MeshGenerator
 
 		int vertexIndex = 0;
 
-		float maxDistanceFromCenter = Vector2.Distance(new Vector2(width, height), Vector2.zero);
+		float maxDistanceFromCenter = Vector2.Distance(new Vector2(width * 0.5f, height * 0.5f), Vector2.zero);
 
 		for (int y = 0; y < height; y++)
 		{
 			for (int x = 0; x < width; x++)
 			{
-				float distanceFromCenterPercent = Vector2.Distance(new Vector2(x, y), Vector2.zero);
+				float distanceFromCenter = Vector2.Distance(new Vector2(x, y), new Vector2(width * 0.5f, height * 0.5f));
 
-				float heightValue = heightCurve.Evaluate(heightMap[x, y]) * heightMultiplier;
+				float distanceFromCenterPercent = distanceFromCenter / maxDistanceFromCenter;
+
+				float valueFromCurve = heightCurve.Evaluate(heightMap[x, y]);
+
+				float heightValue = valueFromCurve * heightMultiplier;
+
+				// Ignore water etc.
+				if (valueFromCurve > 0.0f)
+				{
+					heightValue += distanceFromCenter;
+
+					// Border
+					if (x < borderSize || x > width - borderSize || y < borderSize || y > height - borderSize)
+					{
+						heightValue *= (distanceFromCenterPercent * borderHeightMultiplier);
+					}
+				}
+
 
 				meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightValue, topLeftZ - y);
-
 				meshData.uvs[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
 
 				if (x < width - 1 && y < height - 1)
