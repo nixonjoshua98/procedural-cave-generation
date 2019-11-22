@@ -1,25 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
-using System.Linq;
+using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
 	[Header("Perlin Noise")]
-
 	[Range(0.0f, 0.25f)] public double frequency;
 	[Range(0.0f, 1.0f)] public double lacunarity;
 	[Range(0.0f, 2.0f)] public double persistance;
 	[Range(0, 10)]  public int octaves;
 
-	[Header("Gameobjects")]
-	public GameObject tileParent;
-
 	[Header("World Attributes")]
-
 	[Range(8, 128)] public int tileSize;
-
 	[Space]
-
 	[Range(16, 250)] public int worldWidth;
 	[Range(16, 250)] public int worldHeight;
 
@@ -42,52 +37,17 @@ public class TerrainGenerator : MonoBehaviour
 
 	public void GenerateTerrain()
 	{
-		float[,] noiseMap = Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.Range(0, 9999));
+		float[,] noiseMap = Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.Range(-99999, 99999));
 
-		TerrainType[] terrainMap = GenerateTerrainTypeMap(noiseMap);
-
-		// Generate color map
-		Color[] colorMap = new Color[worldWidth * worldHeight];
-		for (int i = 0; i < terrainMap.Length; i++)
-			colorMap[i] = terrainMap[i].color;
-
+		TerrainType[] terrainMap	= GenerateTerrainTypeMap(noiseMap);
+		Color[] colorMap			= GenerateColorMap(terrainMap);
 
 		TerrainDisplay display = GetComponent<TerrainDisplay>();
 
-		Texture2D t = TextureGenerator.TextureFromColorMap(colorMap, worldWidth, worldHeight);
-		MeshData m = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, borderSize, borderHeightMultiplier, meshHeightCurve);
+		Texture2D meshTexture = TextureGenerator.TextureFromColorMap(colorMap, worldWidth, worldHeight);
+		MeshData meshData = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, borderSize, borderHeightMultiplier, meshHeightCurve);
 
-		foreach (Transform child in tileParent.transform)
-			DestroyImmediate(child.gameObject);
-
-		display.DrawMesh(m, t);
-
-		Debug.Log("Mesh Vertices Count:" + m.vertices.Length);
-
-
-		for (int y = 0; y < worldHeight; y++)
-		{
-			for (int x = 0; x < worldWidth; x++)
-			{
-				int index = x + (y * worldWidth);
-
-				TerrainType terrain = terrainMap[index];
-
-				Vector3 v = m.vertices[index];
-
-				if (terrain.name == "Deep Water")
-				{
-					v.x = (v.x * tileSize) + (tileSize / 2);
-					v.z = (v.z * tileSize) - (tileSize / 2);
-
-					//GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-					//cube.transform.position = v;
-					//cube.transform.localScale = new Vector3(tileSize, 1.0f, tileSize);
-					//cube.transform.parent = tileParent.transform;
-				}
-			}
-		}
+		display.DrawMesh(meshData, meshTexture);
 	}
 
 	public TerrainType[] GenerateTerrainTypeMap(float[,] noiseMap)
@@ -113,6 +73,30 @@ public class TerrainGenerator : MonoBehaviour
 		}
 
 		return terrainMap;
+	}
+
+	public Color[] GenerateColorMap(TerrainType[] terrainMap)
+	{
+		Color[] colorMap = new Color[worldWidth * worldHeight];
+
+		for (int i = 0; i < terrainMap.Length; i++)
+			colorMap[i] = terrainMap[i].color;
+
+		return colorMap;
+	}
+
+	public void CreateCube(Vector3 pos, Color col)
+	{
+		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+		pos.x *= tileSize;
+		pos.z *= tileSize;
+		pos.y += 1.0f;
+
+		cube.transform.localScale	= new Vector3(tileSize, 1.0f, tileSize);
+		cube.transform.position		= pos;
+
+		cube.GetComponent<MeshRenderer>().material.color = col;
 	}
 }
 
