@@ -13,8 +13,7 @@ public class TerrainGenerator : MonoBehaviour
 	[Range(0, 10)]  public int octaves;
 
 	[Header("World Attributes")]
-	[Range(8, 128)] public int tileSize;
-	[Space]
+	[HideInInspector] public int tileSize;
 	[Range(16, 250)] public int worldWidth;
 	[Range(16, 250)] public int worldHeight;
 
@@ -41,6 +40,8 @@ public class TerrainGenerator : MonoBehaviour
 
 	public void GenerateTerrain()
 	{
+		tileSize = (int) meshRenderer.gameObject.transform.localScale.x;
+
 
 		float[,] noiseMap = Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.Range(-99999, 99999));
 
@@ -52,34 +53,9 @@ public class TerrainGenerator : MonoBehaviour
 
 		DrawMesh(meshData, meshTexture);
 
-		for (int y = 0; y < worldHeight; y++)
-		{
-			for (int x = 0; x < worldWidth; x++)
-			{
-				int index = x + (y * worldWidth);
+		DecorationGenerator settlementGenerator = GetComponent<DecorationGenerator>();
 
-				TerrainType terrain = terrainMap[index];
-
-				Vector3 v = meshData.vertices[index];
-
-				if (terrain.height >= 3.0f)
-				{
-					v.x = (v.x * tileSize) + (tileSize / 2);
-					v.z = (v.z * tileSize) - (tileSize / 2);
-					v.y += 1.0f;
-
-					GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-					cube.transform.position = v;
-					cube.transform.localScale = new Vector3(tileSize, 1.0f, tileSize);
-					cube.transform.parent = meshRenderer.gameObject.transform;
-				}
-			}
-		}
-
-	SettlementGenerator settlementGenerator = GetComponent<SettlementGenerator>();
-
-      settlementGenerator.Generate();
+		settlementGenerator.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, meshRenderer.gameObject);
 
     }
 

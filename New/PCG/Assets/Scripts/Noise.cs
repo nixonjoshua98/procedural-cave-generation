@@ -4,7 +4,6 @@ using UnityEngine;
 
 using LibNoise;
 using LibNoise.Generator;
-using LibNoise.Operator;
 
 public static class Noise
 {
