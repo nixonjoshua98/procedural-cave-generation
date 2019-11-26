@@ -33,7 +33,7 @@ public class DecorationGenerator : MonoBehaviour
 				{
 					if (terrain.name == "Grass")
 					{
-						if (rand <= 0.15f)
+						if (rand <= 0.05f)
 							obj = Instantiate(house, parent.transform);
 					}
 				}

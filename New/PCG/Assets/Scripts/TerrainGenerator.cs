@@ -14,6 +14,7 @@ public class TerrainGenerator : MonoBehaviour
 
 	[Header("World Attributes")]
 	[HideInInspector] public int tileSize;
+	[Space]
 	[Range(16, 250)] public int worldWidth;
 	[Range(16, 250)] public int worldHeight;
 
@@ -53,9 +54,9 @@ public class TerrainGenerator : MonoBehaviour
 
 		DrawMesh(meshData, meshTexture);
 
-		DecorationGenerator settlementGenerator = GetComponent<DecorationGenerator>();
+		DecorationGenerator decorationgen = GetComponent<DecorationGenerator>();
 
-		settlementGenerator.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, meshRenderer.gameObject);
+		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, meshRenderer.gameObject);
 
     }
 
