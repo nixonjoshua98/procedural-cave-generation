@@ -23,9 +23,7 @@ public class ObjectGenerator : MonoBehaviour
 				Vector3 v			= vertices[index];
 
 				v.x += 0.5f;
-				v.z += 0.5f;
-
-				//v.y += 16.0f;
+				v.z -= 0.5f;
 
 				if (isBorder)
 				{
@@ -41,18 +39,17 @@ public class ObjectGenerator : MonoBehaviour
 				{
 					switch (region.name)
 					{
-
 						case "Dirt 0":
 							SpawnMushroom(v, x, y, parent.transform);
 							break;
 
-						case "Grass 1":
-							SpawnHouse(v, parent.transform);
-							break;
+						//case "Grass 1":
+						//	SpawnHouse(v, parent.transform);
+						//	break;
 
-						case "Water":
-							SpawnRockInWater(v, parent.transform);
-							break;
+						//case "Water":
+						//	SpawnRockInWater(v, parent.transform);
+						//	break;
 					}
 				}
 			}
@@ -75,7 +72,7 @@ public class ObjectGenerator : MonoBehaviour
 	{
 		float rand = Random.value;
 
-		if (rand <= 0.01f)
+		if (rand <= 1f)
 		{
 			GameObject _mushroom = Instantiate(mushroom, parent);
 
