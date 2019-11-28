@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, float borderSize, float borderHeightMultiplier, AnimationCurve heightCurve)
+	public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMultiplier, float borderSize, float borderMultiplier, AnimationCurve heightCurve, float waterHeight)
 	{
 		int width = heightMap.GetLength(0);
 		int height = heightMap.GetLength(1);
@@ -31,14 +31,14 @@ public static class MeshGenerator
 				float heightValue = valueFromCurve * heightMultiplier;
 
 				// Ignore water etc.
-				if (valueFromCurve > -0.5f)
+				if (valueFromCurve > waterHeight)
 				{
-					heightValue += distanceFromCenter;
+					//heightValue += distanceFromCenter;
 
 					// Border
 					if (x < borderSize || x > width - borderSize || y < borderSize || y > height - borderSize)
 					{
-						heightValue *= (distanceFromCenterPercent * borderHeightMultiplier);
+						heightValue *= (distanceFromCenterPercent * borderMultiplier);
 					}
 				}
 

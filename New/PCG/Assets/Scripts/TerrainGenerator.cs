@@ -6,59 +6,64 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
+	public static TerrainGenerator instance = null;
+
 	[Header("Perlin Noise")]
 	[Range(0.0f, 0.25f)] public double frequency;
 	[Range(0.0f, 1.0f)] public double lacunarity;
 	[Range(0.0f, 2.0f)] public double persistance;
-	[Range(0, 10)]  public int octaves;
-
-	[Header("World Attributes")]
-	[HideInInspector] public int tileSize;
-	[Space]
-	[Range(16, 250)] public int worldWidth;
-	[Range(16, 250)] public int worldHeight;
-
+	[Range(0, 25)]  public int octaves;
 	[Header("Border Attributes")]
-	[Range(1.0f, 64.0f)] public float borderHeightMultiplier;
+	[Range(1.0f, 64.0f)] public float borderMultiplier;
 	[Range(0, 128)] public int borderSize;
-
-	[Header("Mesh Attributes")]
-	public float meshHeightMultiplier;
-	public AnimationCurve meshHeightCurve;
-
-    [Header("Components")]
-    public MeshFilter meshFilter;
-    public MeshRenderer meshRenderer;
-
+	[Header("Terrain Mesh Attributes")]
+	public float heightMultiplier;
+	[Space]
+	public AnimationCurve heightCurve;
+	[Header("Gameobjects")]
+	public GameObject ravineObject;
     [Space]
-
 	public TerrainType[] regions;
+
+	// Hidden from inspector
+	private int tileSize;
+	private const int worldWidth = 250;
+	private const int worldHeight = 250;
+	[HideInInspector] public TerrainType[] terrainMap;
 
 	private void Start()
 	{
 		GenerateTerrain();
 	}
 
+	private void OnGUI()
+	{
+		if (GUILayout.Button("Generate"))
+		{
+			GenerateTerrain();
+		}
+	}
+
 	public void GenerateTerrain()
 	{
-		tileSize = (int) meshRenderer.gameObject.transform.localScale.x;
+		instance = this;
 
+		Random.InitState(69);
 
-		float[,] noiseMap = Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.Range(-99999, 99999));
+		tileSize = (int)ravineObject.transform.localScale.x;
 
-		TerrainType[] terrainMap	= GenerateTerrainTypeMap(noiseMap);
-		Color[] colorMap			= GenerateColorMap(terrainMap);
-
-		Texture2D meshTexture   = TextureFromColorMap(colorMap, worldWidth, worldHeight);
-		MeshData meshData       = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, borderSize, borderHeightMultiplier, meshHeightCurve);
+		float[,] noiseMap		= Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.seed);
+		terrainMap				= GenerateTerrainTypeMap(noiseMap);
+		Color[] colorMap		= GenerateColorMap(terrainMap);
+		Texture2D meshTexture	= TextureFromColorMap(colorMap, worldWidth, worldHeight);
+		MeshData meshData		= MeshGenerator.GenerateTerrainMesh(noiseMap, heightMultiplier, borderSize, borderMultiplier, heightCurve, regions[0].height);
 
 		DrawMesh(meshData, meshTexture);
 
-		DecorationGenerator decorationgen = GetComponent<DecorationGenerator>();
+		ObjectGenerator decorationgen = GetComponent<ObjectGenerator>();
 
-		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, meshRenderer.gameObject);
-
-    }
+		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, ravineObject);
+	}
 
 	public TerrainType[] GenerateTerrainTypeMap(float[,] noiseMap)
 	{
@@ -112,16 +117,7 @@ public class TerrainGenerator : MonoBehaviour
 
     public void DrawMesh(MeshData meshData, Texture2D texture)
     {
-        meshFilter.sharedMesh = meshData.CreateMesh();
-
-        meshRenderer.sharedMaterial.mainTexture = texture;
+		ravineObject.GetComponent<MeshFilter>().sharedMesh						= meshData.CreateMesh();
+		ravineObject.GetComponent<MeshRenderer>().sharedMaterial.mainTexture	= texture;
     }
-}
-
-[System.Serializable]
-public struct TerrainType
-{
-	public string name;
-	public float height;
-	public Color color;
 }

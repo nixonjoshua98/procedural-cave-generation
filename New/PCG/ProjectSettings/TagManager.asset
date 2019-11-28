@@ -18,6 +18,7 @@ TagManager:
   - Mushroom
   - BonfireTile
   - Settlement
+  - Terrain
   layers:
   - Default
   - TransparentFX
