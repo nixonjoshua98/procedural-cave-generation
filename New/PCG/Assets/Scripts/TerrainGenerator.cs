@@ -26,7 +26,6 @@ public class TerrainGenerator : MonoBehaviour
 	public TerrainType[] regions;
 
 	// Hidden from inspector
-	private int tileSize;
 	private const int worldWidth = 250;
 	private const int worldHeight = 250;
 	[HideInInspector] public TerrainType[] terrainMap;
@@ -36,21 +35,11 @@ public class TerrainGenerator : MonoBehaviour
 		GenerateTerrain();
 	}
 
-	private void OnGUI()
-	{
-		if (GUILayout.Button("Generate"))
-		{
-			GenerateTerrain();
-		}
-	}
-
 	public void GenerateTerrain()
 	{
 		instance = this;
 
 		Random.InitState(69);
-
-		tileSize = (int)ravineObject.transform.localScale.x;
 
 		float[,] noiseMap		= Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.seed);
 		terrainMap				= GenerateTerrainTypeMap(noiseMap);
@@ -62,7 +51,7 @@ public class TerrainGenerator : MonoBehaviour
 
 		ObjectGenerator decorationgen = GetComponent<ObjectGenerator>();
 
-		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, tileSize, borderSize, ravineObject);
+		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
 	}
 
 	public TerrainType[] GenerateTerrainTypeMap(float[,] noiseMap)

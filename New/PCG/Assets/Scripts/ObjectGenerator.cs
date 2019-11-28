@@ -11,7 +11,7 @@ public class ObjectGenerator : MonoBehaviour
 
 	private Color[] colors = new Color[] { Color.red, Color.green, Color.yellow, Color.blue };
 
-	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int tileSize, int borderSize, GameObject parent)
+	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int borderSize, GameObject parent)
 	{
 		for (int y = 0; y < worldHeight; y++)
 		{
@@ -22,9 +22,10 @@ public class ObjectGenerator : MonoBehaviour
 				TerrainType region	= terrainMap[index];
 				Vector3 v			= vertices[index];
 
-				v.x = (v.x * tileSize) + (tileSize / 2);
-				v.z = (v.z * tileSize) - (tileSize / 2);
-				v.y += 16.0f;
+				v.x += 0.5f;
+				v.z += 0.5f;
+
+				//v.y += 16.0f;
 
 				if (isBorder)
 				{
@@ -66,8 +67,7 @@ public class ObjectGenerator : MonoBehaviour
 		{
 			GameObject _beacon = Instantiate(beacon, parent);
 
-			_beacon.transform.position		= pos;
-			_beacon.transform.localScale	= new Vector3(1.0f, 32.0f, 1.0f);
+			_beacon.transform.position	= pos;
 		}
 	}
 
@@ -80,7 +80,6 @@ public class ObjectGenerator : MonoBehaviour
 			GameObject _mushroom = Instantiate(mushroom, parent);
 
 			_mushroom.transform.position = pos;
-			_mushroom.transform.localScale = new Vector3(1.0f, 32.0f, 1.0f);
 
 			GameObject head = _mushroom.transform.GetChild(1).gameObject;
 
@@ -99,10 +98,10 @@ public class ObjectGenerator : MonoBehaviour
 		{
 			GameObject _house = Instantiate(house, parent);
 
-			pos.y += 24.0f;
+			pos.y += 1.3f;
 
 			_house.transform.position = pos;
-			_house.transform.localScale = new Vector3(1.0f, 32.0f, 1.0f);
+			
 		}
 	}
 
@@ -114,11 +113,8 @@ public class ObjectGenerator : MonoBehaviour
 		{
 			GameObject _rock = Instantiate(submergedRock, parent);
 
-			pos.y -= 75.0f;
-
 			_rock.transform.position = pos;
 			_rock.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360.0f), 0);
-			_rock.transform.localScale = new Vector3(1.0f, 32.0f, 1.0f);
 		}
 	}
 }
