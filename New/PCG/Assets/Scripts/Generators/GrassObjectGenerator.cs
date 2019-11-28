@@ -6,6 +6,8 @@ public class GrassObjectGenerator : MonoBehaviour
 {
 	public GameObject[] objects;
 
+	public GameObject lamp;
+
 	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int borderSize, GameObject parent)
 	{
 		for (int y = 0; y < worldHeight; y++)
@@ -24,14 +26,19 @@ public class GrassObjectGenerator : MonoBehaviour
 
 				if (region.name == "Grass 0")
 				{
-					if (rand <= 0.25f)
-					{
-						GameObject _object = Instantiate(objects[Random.Range(0, objects.Length)], parent.transform);
+					GameObject _object = null;
 
-						_object.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360.0f), 0.0f);
+					if (rand <= 0.0025f)
+						_object = Instantiate(lamp, parent.transform);
 
-						_object.transform.position = v;
-					}
+					else if (rand <= 0.25f)
+						_object = Instantiate(objects[Random.Range(0, objects.Length)], parent.transform);
+
+					else
+						continue;
+
+					_object.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360.0f), 0.0f);
+					_object.transform.position = v;
 				}
 			}
 		}
