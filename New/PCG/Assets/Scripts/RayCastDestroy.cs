@@ -6,14 +6,13 @@ public class RayCastDestroy : MonoBehaviour
 {
 	private void Awake()
 	{
-		Collider[] colliders = Physics.OverlapSphere(transform.position, 48.0f);
+		Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(0.5f, 0.5f, 0.5f));
+
+		//Debug.Log(colliders.Length);
 
 		foreach (Collider c in colliders)
 		{
-			if (c.gameObject == gameObject)
-				continue;
-
-			Destroy(c.gameObject);
+			//Destroy(c.gameObject);
 		}
 	}
 }

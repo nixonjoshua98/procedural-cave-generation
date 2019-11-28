@@ -39,7 +39,7 @@ public class TerrainGenerator : MonoBehaviour
 	{
 		instance = this;
 
-		Random.InitState(69);
+		Random.Range(-9999999, 9999999);
 
 		float[,] noiseMap		= Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.seed);
 		terrainMap				= GenerateTerrainTypeMap(noiseMap);
@@ -49,9 +49,8 @@ public class TerrainGenerator : MonoBehaviour
 
 		DrawMesh(meshData, meshTexture);
 
-		ObjectGenerator decorationgen = GetComponent<ObjectGenerator>();
-
-		decorationgen.Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
+		GetComponent<WaterObjectsGenerator>().Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
+		GetComponent<GrassObjectGenerator>().Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
 	}
 
 	public TerrainType[] GenerateTerrainTypeMap(float[,] noiseMap)

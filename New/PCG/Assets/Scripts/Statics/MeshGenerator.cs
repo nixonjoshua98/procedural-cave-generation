@@ -31,10 +31,8 @@ public static class MeshGenerator
 				float heightValue = valueFromCurve * heightMultiplier;
 
 				// Ignore water etc.
-				if (valueFromCurve > waterHeight)
+				if (valueFromCurve >= waterHeight)
 				{
-					//heightValue += distanceFromCenter;
-
 					// Border
 					if (x < borderSize || x > width - borderSize || y < borderSize || y > height - borderSize)
 					{
@@ -43,8 +41,8 @@ public static class MeshGenerator
 				}
 
 
-				meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightValue, topLeftZ - y);
-				meshData.uvs[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
+				meshData.vertices[vertexIndex]	= new Vector3(topLeftX + x, heightValue, topLeftZ - y);
+				meshData.uvs[vertexIndex]		= new Vector2(x / (float)width, y / (float)height);
 
 				if (x < width - 1 && y < height - 1)
 				{
