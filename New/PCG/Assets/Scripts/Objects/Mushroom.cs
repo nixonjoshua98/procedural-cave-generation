@@ -27,11 +27,6 @@ public class Mushroom : ObjectBase
 
             TerrainType t = GetTerrainAtPosition(x + (int)p.x, y + (int)p.z);
 
-            //Debug.DrawLine(pos, transform.position, Color.yellow, 9539535);
-            //Debug.DrawLine(pos, pos + Vector3.up * 50, Color.yellow, 9539535);
-
-            //Debug.DrawLine(pos + Vector3.left * 0.5f, pos - Vector3.left * 0.5f, Color.yellow, 32895382);
-
             if (t.name == GetTerrainAtPosition(x, y).name)
             {
                 if (!Physics.CheckBox(pos, new Vector3(0.5f, 0.5f, 0.5f)))

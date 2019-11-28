@@ -51,6 +51,7 @@ public class TerrainGenerator : MonoBehaviour
 
 		GetComponent<WaterObjectsGenerator>().Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
 		GetComponent<GrassObjectGenerator>().Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
+		GetComponent<DirtObjectGenerator>().Generate(worldWidth, worldHeight, terrainMap, meshData.vertices, borderSize, ravineObject);
 	}
 
 	public TerrainType[] GenerateTerrainTypeMap(float[,] noiseMap)
