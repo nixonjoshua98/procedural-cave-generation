@@ -5,11 +5,10 @@ using UnityEngine;
 public class Firefly : MonoBehaviour
 {
 	private Vector3 start;
-
 	public Vector3 target;
 
-	private float rotateSpeed = 0.25f;
-	private float moveSpeed = 2.0f;
+	private float rotateSpeed	= 0.25f;
+	private float moveSpeed		= 2.0f;
 
 	private void Start()
 	{
