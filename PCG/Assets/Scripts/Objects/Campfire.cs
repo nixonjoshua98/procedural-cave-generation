@@ -13,24 +13,40 @@ public class Campfire : MonoBehaviour
 
 	private void Generate()
 	{
-		Vector3 center = transform.position;
+		Vector3 center = this.transform.position;
+		Debug.Log(center);
+
 
 		float radius	= 0.1f;
-		int numObjects	= Random.Range(3, 7);
+		int numPlanks	= Random.Range(3, 7);
 
-		for (int i = 0; i < numObjects; i++)
+		for (int i = 0; i < numPlanks; i++)
 		{
-			int ang = (360 / numObjects) * i;
+			//int ang = (360 / numPlanks) * i;
+
+			//Vector3 pos;
+
+			//pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+			//pos.y = center.z;
+			//pos.z = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+
+			//Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
+
+			GameObject _plank = Instantiate(plank, Vector3.zero, Quaternion.identity, transform);
+
+			int ang = (360 / numPlanks) * i;
 
 			Vector3 pos;
 
-			pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-			pos.y = center.z;
-			pos.z = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+			pos.x = radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+			pos.y = 0;
+			pos.z = radius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
 			Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
 
-			GameObject _plank = Instantiate(plank, pos, rot, transform);
+			_plank.transform.position = pos;
+
+			_plank.transform.rotation = rot;
 
 			_plank.transform.localScale = new Vector3(0.1f, 0.1f, 0.25f);
 		}
