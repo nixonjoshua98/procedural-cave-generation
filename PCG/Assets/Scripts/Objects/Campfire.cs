@@ -42,13 +42,15 @@ public class Campfire : MonoBehaviour
 			pos.y = 0;
 			pos.z = radius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
-			Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
+			Quaternion rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero - pos);
 
-			_plank.transform.position = pos;
+			
+			
 
 			_plank.transform.rotation = rot;
 
 			_plank.transform.localScale = new Vector3(0.1f, 0.1f, 0.25f);
+			_plank.transform.localPosition = pos;
 		}
 	}
 }
