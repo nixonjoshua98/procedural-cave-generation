@@ -4,21 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - HouseTile
-  - EmptyTile
-  - SettlementTile
-  - House
-  - TilesParent
-  - DecorationTile
-  - MushroomTile
-  - WaterTile
-  - SettlementCenterTile
-  - Undefined
-  - Decoration
   - Mushroom
-  - BonfireTile
-  - Settlement
   - Terrain
+  - GrassTile
   layers:
   - Default
   - TransparentFX

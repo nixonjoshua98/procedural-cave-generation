@@ -7,15 +7,17 @@ public class DirtObjectGenerator : MonoBehaviour
 	private Color[] colors = new Color[] { Color.red, Color.green, Color.yellow, Color.blue };
 
 	public GameObject[] objects;
-	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int borderSize, GameObject parent)
+	public void Generate(int worldWidth, int worldHeight, TerrainType[] regionArray, Vector3[] vertices, int borderSize, GameObject parent)
 	{
+		int _ = 0;
+
 		for (int y = 0; y < worldHeight; y++)
 		{
 			for (int x = 0; x < worldWidth; x++)
 			{
 				bool isBorder		= x < borderSize || x > worldWidth - borderSize || y < borderSize || y > worldHeight - borderSize;
 				int index			= x + (y * worldWidth);
-				TerrainType region	= terrainMap[index];
+				TerrainType region	= regionArray[index];
 				Vector3 v			= vertices[index];
 
 				float rand = Random.value;
@@ -36,6 +38,8 @@ public class DirtObjectGenerator : MonoBehaviour
 							GameObject head = _object.transform.GetChild(1).gameObject;
 
 							head.GetComponent<MeshRenderer>().material.color = colors[Random.Range(0, colors.Length)];
+
+							_object.GetComponent<Mushroom>().Create(index);
 						}
 					}
 				}

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ObjectBase : MonoBehaviour
 {
-	public TerrainType GetTerrainAtPosition(int x, int y)
+	public TerrainType GetTerrainAtPosition(int index)
 	{
-		int index = (int)(x + (y * 250));
-
 		return TerrainGenerator.instance.terrainMap[index];
 	}
 }

@@ -4,43 +4,44 @@ using UnityEngine;
 
 public class Mushroom : ObjectBase
 {
-	int x;
-	int y;
+	private int cellIndex;
 
-	public void Create(int x, int y)
+	public void Create(int _cellIndex)
 	{
-		this.x = x;
-		this.y = y;
+		cellIndex = _cellIndex;
 
 		gameObject.name = "Mushroom";
 
-		Invoke("SpawnNewMushroom", Random.Range(3.0f, 10.0f));
+		InvokeRepeating("SpawnNewMushroom", Random.Range(5.0f, 6.0f), Random.Range(5.0f, 10.0f));
 	}
 
 	private void SpawnNewMushroom()
 	{
-        Vector3[] vectorOffets = new Vector3[] { Vector3.left, Vector3.right, Vector3.back, Vector3.forward };
+        Vector3[] vectorOffets	= new Vector3[] { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
+		int[] indexes			= new int[] { cellIndex - 250, cellIndex + 250, cellIndex - 1, cellIndex + 1 };
 
-        foreach (Vector3 p in vectorOffets)
-        {
-            Vector3 pos = transform.position + p;
+		TerrainType t = GetTerrainAtPosition(cellIndex);
 
-            TerrainType t = GetTerrainAtPosition(x + (int)p.x, y + (int)p.z);
+		for (int i = 0; i < 4; i++)
+		{
+			Vector3 offset	= vectorOffets[i];
+			Vector3 pos		= transform.position + offset;
 
-            if (t.name == GetTerrainAtPosition(x, y).name)
-            {
-                if (!Physics.CheckBox(pos, new Vector3(0.5f, 0.5f, 0.5f)))
-                {
-                    GameObject newMushroom = Instantiate(gameObject, transform.parent);
+			if (indexes[i] < 0 || indexes[i] >= 62_500)
+				continue;
 
-                    newMushroom.transform.position = pos;
+			if (t.name == GetTerrainAtPosition(indexes[i]).name)
+			{
+				if (!Physics.CheckBox(pos, new Vector3(0.5f, 0.5f, 0.5f)))
+				{
+					GameObject newMushroom = Instantiate(gameObject, pos,  Quaternion.Euler(0, Random.Range(0, 360.0f), 0.0f), transform.parent);
 
-                    //newMushroom.GetComponent<Mushroom>().Create(x + (int)p.x, y + (int)p.z);
-                    
-                    break;
-                }
-            }
-        }
+					newMushroom.GetComponent<Mushroom>().Create(indexes[i]);
+
+					break;
+				}
+			}
+		}
     }
 }
 

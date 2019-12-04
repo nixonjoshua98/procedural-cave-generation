@@ -9,15 +9,17 @@ public class GrassObjectGenerator : MonoBehaviour
 
 	public GameObject lamp;
 
-	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int borderSize, GameObject parent)
+	public void Generate(int worldWidth, int worldHeight, TerrainType[] regionArray, Vector3[] vertices, int borderSize, GameObject parent)
 	{
+		int _ = 0;
+
 		for (int y = 0; y < worldHeight; y++)
 		{
 			for (int x = 0; x < worldWidth; x++)
 			{
 				bool isBorder		= x < borderSize || x > worldWidth - borderSize || y < borderSize || y > worldHeight - borderSize;
 				int index			= x + (y * worldWidth);
-				TerrainType region	= terrainMap[index];
+				TerrainType region	= regionArray[index];
 				Vector3 v			= vertices[index];
 
 				float rand = Random.value;
@@ -42,8 +44,15 @@ public class GrassObjectGenerator : MonoBehaviour
 				{
 					GameObject _object = null;
 
-					if (rand <= 0.25f)
+					if (rand <= 0.005f && _ == 0)
+					{
+						++_;
+
 						_object = Instantiate(higherGrassObjects[Random.Range(0, higherGrassObjects.Length)], v, Quaternion.identity, parent.transform);
+
+						if (_object.CompareTag("Campfire"))
+							_object.GetComponent<Campfire>().Create(index);
+					}
 				}
 			}
 		}
