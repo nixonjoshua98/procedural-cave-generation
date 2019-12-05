@@ -9,17 +9,19 @@ public class Campfire : ObjectBase
 
 	private int cellIndex;
 
+    private List<int> previousCellIndexes;
+
 	public void Create(int _cellIndex)
 	{
 		cellIndex = _cellIndex;
 
 		GenerateCampfire();
 		GenerateSettlement();
-	}
+}
 
-	private void GenerateCampfire()
+private void GenerateCampfire()
 	{
-		float radius	= 0.1f;
+		float radius	    = 0.1f;
 		int numPlanks	= Random.Range(3, 7);
 
 		for (int i = 0; i < numPlanks; i++)
@@ -43,30 +45,43 @@ public class Campfire : ObjectBase
 
 	private void GenerateSettlement()
 	{
-		//GetNeighboursRecursive(transform.position, cellIndex);
+        previousCellIndexes = new List<int>();
+
+        var neighbours = GetNeighboursRecursive(transform.position, cellIndex);
+
+        foreach (PositionIndex p in neighbours)
+        {
+            GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            tile.name = "TEST";
+
+            tile.transform.position = p.pos;
+
+            tile.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
+        }
 	}
 
 	private List<PositionIndex> GetNeighboursRecursive(Vector3 center, int index)
 	{
 		List<PositionIndex> positionIndices = GetNeighbourPositions(center, index);
 
-		int count = positionIndices.Count;
+        previousCellIndexes.Add(index);
 
-		for (int i = 0; i < count; i++)
+        for (int i = 0; i < positionIndices.Count(); i++)
 		{
-			List<PositionIndex> temp = GetNeighboursRecursive(positionIndices[i].pos, positionIndices[i].index);
+            List<PositionIndex> temp = GetNeighboursRecursive(positionIndices[i].pos, positionIndices[i].index);
 
-			foreach (PositionIndex t in temp)
-				positionIndices.Add(t);
+            for (int j = 0; j < temp.Count(); j++)
+                positionIndices.Add(temp[j]);
 		}
 
-		return positionIndices;
+        return positionIndices.GroupBy(p => p.index).Select(g => g.First()).ToList();
 	}
 
 	private List<PositionIndex> GetNeighbourPositions(Vector3 center, int index)
 	{
 		Vector3[] vectorOffets	= new Vector3[] { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
-		int[] indexes			= new int[] { index - 250, index + 250, index - 1, index + 1 };
+		int[] indexes			        = new int[] { index - 250, index + 250, index - 1, index + 1 };
 
 		List<PositionIndex> positions = new List<PositionIndex>();
 
@@ -79,22 +94,19 @@ public class Campfire : ObjectBase
 			if (indexes[i] < 0 || indexes[i] >= 62_500)
 				continue;
 
+            if (previousCellIndexes.Contains(indexes[i]))
+                continue;
+
 			if (t.name == GetTerrainAtPosition(indexes[i]).name)
 			{
 				if (!Physics.CheckBox(pos, new Vector3(0.5f, 0.5f, 0.5f)))
 				{
-					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-					tile.name = "TEST";
-
-					positions.Add(new PositionIndex(pos, indexes[i]));
-
-					tile.transform.position		= pos;
-					tile.transform.localScale	= new Vector3(1.0f, 0.1f, 1.0f);
+                    positions.Add(new PositionIndex(pos, indexes[i]));
 				}
-			}
-		}
+            }
+        }
 
 		return positions;
+
 	}
 }
