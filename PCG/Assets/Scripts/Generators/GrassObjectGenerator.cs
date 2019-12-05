@@ -44,10 +44,8 @@ public class GrassObjectGenerator : MonoBehaviour
 				{
 					GameObject _object = null;
 
-					if (rand <= 0.005f && _ == 0)
+					if (rand <= 0.0025f && _  == 0)
 					{
-						++_;
-
 						_object = Instantiate(higherGrassObjects[Random.Range(0, higherGrassObjects.Length)], v, Quaternion.identity, parent.transform);
 
 						if (_object.CompareTag("Campfire"))
