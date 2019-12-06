@@ -7,13 +7,18 @@ public class GrassObjectGenerator : MonoBehaviour
 	public GameObject[] lowerGrassObjects;
 	public GameObject[] higherGrassObjects;
 
+	[Space]
+
 	public GameObject lamp;
+
+	[Header("Settlement Gameobjects")]
+	public GameObject[] settlementObjects;
 
 	public void Generate(int worldWidth, int worldHeight, TerrainType[] regionArray, Vector3[] vertices, int borderSize, GameObject parent)
 	{
 		int numSettlements = 0;
 
-		const int MAX_SETTLEMENTS = 15;
+		const int MAX_SETTLEMENTS = 10;
 		const int MIN_SETTLEMENT_SIZE = 100;
 
 		for (int y = 0; y < worldHeight; y++)
@@ -67,12 +72,19 @@ public class GrassObjectGenerator : MonoBehaviour
 							{
 								numSettlements++;
 
-								settlement.GenerateObjects();
+								settlement.GenerateObjects(settlementObjects);
 							}
 						}
 					}
 				}
 			}
 		}
+
+		Debug.Log("Num Settlements: " + numSettlements);
+
+
+
+
+
 	}
 }

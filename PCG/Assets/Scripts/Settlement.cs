@@ -5,59 +5,69 @@ using UnityEngine;
 
 public class Settlement : ObjectBase
 {
-	private static HashSet<int> allCellIndexesTaken = new HashSet<int>();
+	private static HashSet<int> allCells = new HashSet<int>();
 
 	private int cellIndex;
 
-	private HashSet<int> previousCellIndexes;
+	private HashSet<int> cells;
+	private List<PositionIndex> neighbours;
 
 	public int GeneratePositions(int _cellIndex)
 	{
-		previousCellIndexes = new HashSet<int>();
+		cells = new HashSet<int>();
 
-		if (!allCellIndexesTaken.Contains(_cellIndex))
+		if (!allCells.Contains(_cellIndex))
 		{
 			cellIndex = _cellIndex;
 
 			GenerateSettlement();
 		}
 
-		return previousCellIndexes.Count();
+		return cells.Count();
 	}
 
-	public void GenerateObjects()
+	public void GenerateObjects(GameObject[] objects)
 	{
+		for (int i = 0; i < 2; ++i)
+		{
+			int rand = Random.Range(0, cells.Count);
 
+			PositionIndex posIndex = neighbours[rand];
+
+			neighbours.RemoveAt(rand);
+
+			GameObject spawnedObject = Instantiate(objects[0], posIndex.pos, Quaternion.identity, transform);
+		}
 	}
 
 	private void GenerateSettlement()
 	{
-		var neighbours = GetNeighboursRecursive(transform.position, cellIndex);
+		neighbours = GetNeighboursRecursive(transform.position, cellIndex).ToList();
 
-		foreach (PositionIndex p in neighbours)
-		{
-			GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		//foreach (PositionIndex p in neighbours)
+		//{
+		//	GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-			tile.name = "TEST";
+		//	tile.name = "TEST";
 
-			tile.transform.parent = transform;
+		//	tile.transform.parent = transform;
 
-			tile.transform.position = p.pos;
+		//	tile.transform.position = p.pos;
 
-			tile.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
-		}
+		//	tile.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
+		//}
 	}
 
 	private HashSet<PositionIndex> GetNeighboursRecursive(Vector3 center, int index)
 	{
 		HashSet<PositionIndex> positionIndices = GetNeighbourPositions(center, index);
 
-		allCellIndexesTaken.Add(index);
-		previousCellIndexes.Add(index);
+		allCells.Add(index);
+		cells.Add(index);
 
-		for (int i = 0; i < positionIndices.Count(); i++)
+		for (int i = 0; i < positionIndices.Count; i++)
 		{
-			if (previousCellIndexes.Contains(positionIndices.ElementAt(i).index))
+			if (cells.Contains(positionIndices.ElementAt(i).index))
 				continue;
 
 			HashSet<PositionIndex> temp = GetNeighboursRecursive(positionIndices.ElementAt(i).pos, positionIndices.ElementAt(i).index);

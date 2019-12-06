@@ -273,7 +273,7 @@ MonoBehaviour:
   persistance: 1.059999942779541
   octaves: 10
   borderMultiplier: 1
-  borderSize: 0
+  borderSize: 8
   heightMultiplier: 1
   heightCurve:
     serializedVersion: 2
@@ -368,6 +368,8 @@ MonoBehaviour:
   higherGrassObjects:
   - {fileID: 7889834532680503185, guid: f6330d49179e94646944f8c7557baa4a, type: 3}
   lamp: {fileID: 1984884912211683735, guid: 7d2c475da8ab6ef419ae8de42c05fc39, type: 3}
+  settlementObjects:
+  - {fileID: 4456008822447283870, guid: 84c0afab540a4404bb6ef34800e36676, type: 3}
 --- !u!4 &1053978801
 Transform:
   m_ObjectHideFlags: 0
