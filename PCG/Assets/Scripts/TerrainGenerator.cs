@@ -37,15 +37,7 @@ public class TerrainGenerator : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (GUILayout.Button("Generate"))
-		{
-			var obj = GameObject.Find("Objects");
 
-			for (int i = 0; i < obj.transform.childCount; i++)
-				Destroy(obj.transform.GetChild(i).gameObject);
-
-			GenerateTerrain();
-		}
 	}
 
 	public void GenerateTerrain()

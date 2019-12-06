@@ -4763,6 +4763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7889834532680503196}
   - component: {fileID: 7889834532680503184}
+  - component: {fileID: -110621845028937311}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Campfire
@@ -4798,3 +4799,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plank: {fileID: 3746447439096280860, guid: 04de6b6ea961d6c49978a6683ff1b33f, type: 3}
+--- !u!114 &-110621845028937311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889834532680503185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2be441e4f9e5ff4bba2c02c4be41b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
