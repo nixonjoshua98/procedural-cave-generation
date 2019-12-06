@@ -23,6 +23,9 @@ public class WaterObjectsGenerator : MonoBehaviour
 				v.x += 0.5f;
 				v.z -= 0.5f;
 
+				if (isBorder)
+					continue;
+
 				if (region.name == "Water 0")
 				{
 					if (rand <= 0.03f)

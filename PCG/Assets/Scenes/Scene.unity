@@ -273,7 +273,7 @@ MonoBehaviour:
   persistance: 1.059999942779541
   octaves: 10
   borderMultiplier: 1
-  borderSize: 16
+  borderSize: 0
   heightMultiplier: 1
   heightCurve:
     serializedVersion: 2

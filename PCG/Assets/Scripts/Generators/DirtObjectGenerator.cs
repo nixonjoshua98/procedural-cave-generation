@@ -27,6 +27,9 @@ public class DirtObjectGenerator : MonoBehaviour
 
 				Quaternion rot = Quaternion.Euler(0, Random.Range(0, 360.0f), 0.0f);
 
+				if (isBorder)
+					continue;
+
 				if (region.name == "Dirt 0")
 				{
 					if (rand <= 0.1f)

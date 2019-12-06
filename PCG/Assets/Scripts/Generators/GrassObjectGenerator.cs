@@ -11,6 +11,11 @@ public class GrassObjectGenerator : MonoBehaviour
 
 	public void Generate(int worldWidth, int worldHeight, TerrainType[] regionArray, Vector3[] vertices, int borderSize, GameObject parent)
 	{
+		int numSettlements = 0;
+
+		const int MAX_SETTLEMENTS = 15;
+		const int MIN_SETTLEMENT_SIZE = 100;
+
 		for (int y = 0; y < worldHeight; y++)
 		{
 			for (int x = 0; x < worldWidth; x++)
@@ -27,6 +32,9 @@ public class GrassObjectGenerator : MonoBehaviour
 
 				Quaternion rot = Quaternion.Euler(0, Random.Range(0, 360.0f), 0.0f);
 
+				if (isBorder)
+					continue;
+
 				if (region.name == "Grass 0")
 				{
 					GameObject _object = null;
@@ -42,16 +50,25 @@ public class GrassObjectGenerator : MonoBehaviour
 				{
 					GameObject _object = null;
 
-					if (rand <= 0.0005f)
+					if (rand <= 0.01f && numSettlements < MAX_SETTLEMENTS)
 					{
 						_object = Instantiate(higherGrassObjects[Random.Range(0, higherGrassObjects.Length)], v, Quaternion.identity, parent.transform);
 
 						if (_object.CompareTag("Campfire"))
 						{
-							int size = _object.GetComponent<Settlement>().Generate(index);
+							Settlement settlement = _object.GetComponent<Settlement>();
 
-							if (size == 0)
+							int size = settlement.GeneratePositions(index);
+
+							if (size < MIN_SETTLEMENT_SIZE)
 								Destroy(_object);
+
+							else
+							{
+								numSettlements++;
+
+								settlement.GenerateObjects();
+							}
 						}
 					}
 				}

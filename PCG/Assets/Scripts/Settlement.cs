@@ -11,7 +11,7 @@ public class Settlement : ObjectBase
 
 	private HashSet<int> previousCellIndexes;
 
-	public int Generate(int _cellIndex)
+	public int GeneratePositions(int _cellIndex)
 	{
 		previousCellIndexes = new HashSet<int>();
 
@@ -23,6 +23,11 @@ public class Settlement : ObjectBase
 		}
 
 		return previousCellIndexes.Count();
+	}
+
+	public void GenerateObjects()
+	{
+
 	}
 
 	private void GenerateSettlement()
