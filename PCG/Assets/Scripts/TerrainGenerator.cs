@@ -46,6 +46,8 @@ public class TerrainGenerator : MonoBehaviour
 
 		Random.Range(-9999999, 9999999);
 
+		Debug.Log("Seed: " + Random.seed);
+
 		float[,] noiseMap		= Noise.GenerateNoiseMap(worldWidth, worldHeight, frequency, lacunarity, persistance, octaves, Random.seed);
 		terrainMap				= GenerateTerrainTypeMap(noiseMap);
 		Color[] colorMap		= GenerateColorMap(terrainMap);

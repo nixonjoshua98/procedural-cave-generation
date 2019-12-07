@@ -12,7 +12,7 @@ public class GrassObjectGenerator : MonoBehaviour
 	public GameObject lamp;
 
 	[Header("Settlement Gameobjects")]
-	public GameObject[] settlementObjects;
+	public GameObject[] settlementHouses;
 
 	public void Generate(int worldWidth, int worldHeight, TerrainType[] regionArray, Vector3[] vertices, int borderSize, GameObject parent)
 	{
@@ -72,19 +72,12 @@ public class GrassObjectGenerator : MonoBehaviour
 							{
 								numSettlements++;
 
-								settlement.GenerateObjects(settlementObjects);
+								settlement.GenerateObjects(settlementHouses);
 							}
 						}
 					}
 				}
 			}
 		}
-
-		Debug.Log("Num Settlements: " + numSettlements);
-
-
-
-
-
 	}
 }

@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.025
@@ -273,25 +273,25 @@ MonoBehaviour:
   persistance: 1.059999942779541
   octaves: 10
   borderMultiplier: 1
-  borderSize: 8
+  borderSize: 16
   heightMultiplier: 1
   heightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0051879883
-      value: -1.0154114
-      inSlope: 2
-      outSlope: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1.4905396
-      value: 2.0143433
-      inSlope: 0
-      outSlope: 0
+      time: 1.5014038
+      value: 1.9914703
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -368,8 +368,10 @@ MonoBehaviour:
   higherGrassObjects:
   - {fileID: 7889834532680503185, guid: f6330d49179e94646944f8c7557baa4a, type: 3}
   lamp: {fileID: 1984884912211683735, guid: 7d2c475da8ab6ef419ae8de42c05fc39, type: 3}
-  settlementObjects:
+  settlementHouses:
   - {fileID: 4456008822447283870, guid: 84c0afab540a4404bb6ef34800e36676, type: 3}
+  - {fileID: 6735654370991322839, guid: dd71a513921050b41b624fff0bfc6df7, type: 3}
+  - {fileID: 4030330601590400154, guid: 32dcbb72d19948341a0cb8786fef391d, type: 3}
 --- !u!4 &1053978801
 Transform:
   m_ObjectHideFlags: 0

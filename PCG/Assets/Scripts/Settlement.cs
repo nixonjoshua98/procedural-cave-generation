@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Settlement : ObjectBase
 {
+	private static int houseIndex = 0;
 	private static HashSet<int> allCells = new HashSet<int>();
 
 	private int cellIndex;
@@ -26,36 +27,46 @@ public class Settlement : ObjectBase
 		return cells.Count();
 	}
 
-	public void GenerateObjects(GameObject[] objects)
+	public void GenerateObjects(GameObject[] houses)
 	{
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < 5;)
 		{
-			int rand = Random.Range(0, cells.Count);
+			if (neighbours.Count == 0)
+				break;
+
+			int rand = Random.Range(0, neighbours.Count);
 
 			PositionIndex posIndex = neighbours[rand];
 
 			neighbours.RemoveAt(rand);
 
-			GameObject spawnedObject = Instantiate(objects[0], posIndex.pos, Quaternion.identity, transform);
+			Collider[] hits = Physics.OverlapSphere(posIndex.pos, 0.5f);
+
+			if (hits.Length > 0)
+			{
+				continue;
+			}
+
+			if (i == 0)
+				transform.position = posIndex.pos;
+
+			else
+			{
+				Quaternion rot = Quaternion.Euler(0, Random.Range(0, 360), 0);
+
+				Instantiate(houses[houseIndex], posIndex.pos, rot, transform);
+			}
+
+			++i;
 		}
+
+		houseIndex = (houseIndex + 1) % houses.Length;
+
 	}
 
 	private void GenerateSettlement()
 	{
 		neighbours = GetNeighboursRecursive(transform.position, cellIndex).ToList();
-
-		//foreach (PositionIndex p in neighbours)
-		//{
-		//	GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-		//	tile.name = "TEST";
-
-		//	tile.transform.parent = transform;
-
-		//	tile.transform.position = p.pos;
-
-		//	tile.transform.localScale = new Vector3(1.0f, 0.1f, 1.0f);
-		//}
 	}
 
 	private HashSet<PositionIndex> GetNeighboursRecursive(Vector3 center, int index)

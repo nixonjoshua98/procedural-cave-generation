@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1026089367561963032}
   - component: {fileID: 1604797310016698718}
   - component: {fileID: -7299024932123296645}
-  - component: {fileID: 318049447}
   m_Layer: 0
   m_Name: WaterObjectModel
   m_TagString: Untagged
@@ -60,18 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: -0.3, z: 0}
---- !u!114 &318049447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2639762171300401395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6e3674e80960ba4f8091a7b75be0ed6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4720899304058759657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79,6 +66,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1026089367561963032}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 89b212d6d095bab4f9c542bc6b17bb25,
+        type: 3}
+      propertyPath: m_Name
+      value: WaterObjectModel
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 89b212d6d095bab4f9c542bc6b17bb25,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -154,11 +146,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 800509b414335864da3cebded80be87f, type: 2}
-    - target: {fileID: -927199367670048503, guid: 89b212d6d095bab4f9c542bc6b17bb25,
-        type: 3}
-      propertyPath: m_Name
-      value: WaterObjectModel
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89b212d6d095bab4f9c542bc6b17bb25, type: 3}
 --- !u!4 &359923108814390003 stripped

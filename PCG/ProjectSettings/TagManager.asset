@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Mushroom
   - Terrain
-  - GrassTile
+  - Campfire
+  - Tile
+  - Teepee
   layers:
   - Default
   - TransparentFX
