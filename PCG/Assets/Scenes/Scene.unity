@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d6664f5e755424584f2afb46d6cc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 6538187947821401873, guid: afd227c0f8ab19248b9850f45855c4ba, type: 3}
+  cube: {fileID: -927199367670048503, guid: 9996ef65f42ace7408591ab6bd15be1f, type: 3}
   terrainObject: {fileID: 1580526922}
 --- !u!114 &1053978798
 MonoBehaviour:
@@ -273,7 +273,7 @@ MonoBehaviour:
   persistance: 1.059999942779541
   octaves: 10
   borderMultiplier: 1
-  borderSize: 16
+  borderSize: 8
   heightMultiplier: 1
   heightCurve:
     serializedVersion: 2

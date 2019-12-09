@@ -61,7 +61,6 @@ public class Settlement : ObjectBase
 		}
 
 		houseIndex = (houseIndex + 1) % houses.Length;
-
 	}
 
 	private void GenerateSettlement()

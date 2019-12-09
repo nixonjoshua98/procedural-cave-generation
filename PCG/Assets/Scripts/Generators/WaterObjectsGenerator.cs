@@ -13,10 +13,10 @@ public class WaterObjectsGenerator : MonoBehaviour
 		{
 			for (int x = 0; x < worldWidth; x++)
 			{
-				bool isBorder		= x < borderSize || x > worldWidth - borderSize || y < borderSize || y > worldHeight - borderSize;
-				int index			= x + (y * worldWidth);
+				bool isBorder			= x < borderSize || x > worldWidth - borderSize || y < borderSize || y > worldHeight - borderSize;
+				int index					= x + (y * worldWidth);
 				TerrainType region	= terrainMap[index];
-				Vector3 v			= vertices[index];
+				Vector3 v				= vertices[index];
 
 				float rand = Random.value;
 

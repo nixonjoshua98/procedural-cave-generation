@@ -37,7 +37,7 @@ public class CaveWallGenerator : MonoBehaviour
 				GameObject c = Instantiate(cube, terrainObject.transform);
 
 				c.transform.position	= pos;
-				c.transform.localScale	= new Vector3(5.0f, 100.0f, 1.0f);
+				c.transform.localScale	= new Vector3(100.0f, 500.0f, 100.0f);
 
 				c.transform.LookAt(Vector3.zero);
 			}
