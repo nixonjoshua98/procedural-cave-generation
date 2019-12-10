@@ -8,7 +8,7 @@ public class FireflyController : MonoBehaviour
 
 	private void Start()
 	{
-		int numFlies = 256;
+		int numFlies = 512;
 
 		for (int i = 0; i < numFlies; i++)
 		{

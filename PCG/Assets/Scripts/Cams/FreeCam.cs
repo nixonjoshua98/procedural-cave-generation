@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+
+// Taken from https://gist.github.com/ashleydavis/f025c03a9221bc840a2b
+
+
 /// <summary>
 /// A simple free camera to be added to a Unity game object.
 /// 

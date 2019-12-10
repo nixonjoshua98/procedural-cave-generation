@@ -9,6 +9,8 @@ public class WaterObjectsGenerator : MonoBehaviour
 
 	public void Generate(int worldWidth, int worldHeight, TerrainType[] terrainMap, Vector3[] vertices, int borderSize, GameObject parent)
 	{
+		borderSize /= 2;
+
 		for (int y = 0; y < worldHeight; y++)
 		{
 			for (int x = 0; x < worldWidth; x++)
