@@ -18,7 +18,7 @@ public class GrassObjectGenerator : MonoBehaviour
 	{
 		int numSettlements = 0;
 
-		const int MAX_SETTLEMENTS = 10;
+		const int MAX_SETTLEMENTS = 7;
 		const int MIN_SETTLEMENT_SIZE = 50;
 
 		for (int y = 0; y < worldHeight; y++)
